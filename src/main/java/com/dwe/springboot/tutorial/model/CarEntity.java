@@ -8,7 +8,7 @@ public class CarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    String id;
+    Long id;
     String driveDate;
     String carType;
     String person;
@@ -40,11 +40,11 @@ public class CarEntity {
         this.driveDate = driveDate;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

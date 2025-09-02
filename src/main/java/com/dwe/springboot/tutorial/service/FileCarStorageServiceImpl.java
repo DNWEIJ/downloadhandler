@@ -10,15 +10,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class FileCarStorageServiceImpl implements FileCarStorageService {
     private final CarProperties properties;
-//    private final CarRepository carRepository;
+    private final CarRepository carRepository;
 
     FileCarStorageServiceImpl(CarProperties properties, CarRepository carRepository) {
         this.properties = properties;
-//        this.carRepository = carRepository;
+        this.carRepository = carRepository;
     }
 
 
@@ -38,14 +43,21 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
     }
 
     public void saveRecord(CarEntity car)  {
-//        carRepository.save(car);
-//        try {
-//            Files.writeString(
-//                Paths.get(properties.location() + "/" + properties.file()),
-//                car.toString() + System.lineSeparator(), StandardOpenOption.APPEND
-//            );
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        carRepository.save(car);
+    }
+
+    @Override
+    public List <String> getAll() {
+        Iterable<CarEntity> carEntities = carRepository.findAll();
+        carEntities.forEach(car -> System.out.println(car.toString()));
+
+        return StreamSupport.stream(carEntities.spliterator(), false)
+                .map(CarEntity::toString)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCarRecords() {
+        carRepository.deleteAll();
     }
 }

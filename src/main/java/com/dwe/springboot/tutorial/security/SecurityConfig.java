@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,7 +23,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/login","/templates/**","/static/**").permitAll()
+                        .requestMatchers("/login", "/templates/**", "/static/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults())
@@ -35,13 +34,21 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user =
+        return new InMemoryUserDetailsManager(
                 User.withDefaultPasswordEncoder()
-                        .username("ItIsMe12!")
-                        .password("drivingMyBestCar!")
+                        .username("maria")
+                        .password("drivingSporty!")
                         .roles("USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
+                        .build(),
+                User.withDefaultPasswordEncoder()
+                        .username("daniel")
+                        .password("Daniel0904!")
+                        .roles("ADMIN")
+                        .build(),
+                User.withDefaultPasswordEncoder()
+                        .username("suzanne")
+                        .password("drivingWithoutPetrol!")
+                        .roles("USER")
+                        .build());
     }
 }
