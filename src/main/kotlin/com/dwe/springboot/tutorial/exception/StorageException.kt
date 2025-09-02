@@ -1,6 +1,6 @@
-package com.afolayanseyi.springboot.tutorial.exception
+package com.dwe.springboot.tutorial.exception
 
-class StorageFileNotFoundException : StorageException {
+open class StorageException : RuntimeException {
     constructor(message: String?) : super(message)
     constructor(message: String?, cause: Throwable?) : super(message, cause)
 }

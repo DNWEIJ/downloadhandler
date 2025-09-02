@@ -1,4 +1,4 @@
-package com.afolayanseyi.springboot.tutorial.service
+package com.dwe.springboot.tutorial.service
 
 import org.springframework.web.multipart.MultipartFile
 

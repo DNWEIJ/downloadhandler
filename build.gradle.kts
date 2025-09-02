@@ -7,7 +7,7 @@ plugins {
 	kotlin("plugin.spring") version "2.2.10"
 }
 
-group = "com.afolayanseyi.springboot"
+group = "com.dwe.springboot"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -21,6 +21,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

@@ -1,4 +1,4 @@
-package com.afolayanseyi.springboot.tutorial.controller
+package com.dwe.springboot.tutorial.controller
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

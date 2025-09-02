@@ -1,7 +1,7 @@
-package com.afolayanseyi.springboot.tutorial.service
+package com.dwe.springboot.tutorial.service
 
-import com.afolayanseyi.springboot.tutorial.configuration.StorageProperties
-import com.afolayanseyi.springboot.tutorial.exception.StorageException
+import com.dwe.springboot.tutorial.configuration.StorageProperties
+import com.dwe.springboot.tutorial.exception.StorageException
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile

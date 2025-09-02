@@ -1,0 +1,27 @@
+debug: true
+server:
+  port: 9000
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1GB
+    max-request-size: 1GB
+  http:
+    multipart:
+      enabled: false
+  security:
+    user:
+      name: me
+      password: ok
+app:
+  storage:
+    location: uploadDir
+  car:
+    location: carInformation
+    file: cars.csv
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG

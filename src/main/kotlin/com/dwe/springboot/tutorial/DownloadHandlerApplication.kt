@@ -1,22 +1,23 @@
-package com.afolayanseyi.springboot.tutorial
+package com.dwe.springboot.tutorial
 
-import com.afolayanseyi.springboot.tutorial.configuration.StorageProperties
-import com.afolayanseyi.springboot.tutorial.service.FileStorageService
+import com.dwe.springboot.tutorial.service.FileCarStorageService
+import com.dwe.springboot.tutorial.service.FileStorageService
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
 
 
 @SpringBootApplication
-@EnableConfigurationProperties(StorageProperties::class)
+@ConfigurationPropertiesScan
 class DownloadHandlerApplication {
 
     @Bean
-    fun init(storageService: FileStorageService): CommandLineRunner {
+    fun init(storageService: FileStorageService, carService: FileCarStorageService): CommandLineRunner {
         return CommandLineRunner { args: Array<String?>? ->
-               storageService.init()
+            storageService.init()
+            carService.init()
         }
     }
 

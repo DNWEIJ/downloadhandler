@@ -1,4 +1,4 @@
-package com.afolayanseyi.springboot.tutorial.model
+package com.dwe.springboot.tutorial.model
 
 data class UploadFileResponse(
     val fileName: String,
