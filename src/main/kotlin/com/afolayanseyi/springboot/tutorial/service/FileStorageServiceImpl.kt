@@ -2,20 +2,13 @@ package com.afolayanseyi.springboot.tutorial.service
 
 import com.afolayanseyi.springboot.tutorial.configuration.StorageProperties
 import com.afolayanseyi.springboot.tutorial.exception.StorageException
-import com.afolayanseyi.springboot.tutorial.exception.StorageFileNotFoundException
-import org.springframework.core.io.Resource
-import org.springframework.core.io.UrlResource
 import org.springframework.stereotype.Service
-import org.springframework.util.FileSystemUtils
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
 import java.io.IOException
-import java.net.MalformedURLException
 import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
-import java.util.stream.Stream
 
 @Service
 class FileStorageServiceImpl(
@@ -54,30 +47,5 @@ class FileStorageServiceImpl(
         }
     }
 
-    override fun loadAll(): Stream<Path> =
-        try {
-            Files.walk(rootLocation, 1)
-                .filter { path -> path != rootLocation }
-                .map(rootLocation::relativize)
-        } catch (exception: IOException) {
-            throw StorageException("Failed to read stored files", exception)
-        }
 
-
-    override fun load(fileName: String): Path = rootLocation.resolve(fileName)
-
-    override fun loadAsResources(fileName: String): Resource = try {
-        val resource: Resource = UrlResource(load(fileName).toUri())
-        if (resource.exists() || resource.isReadable) {
-            resource
-        } else {
-            throw StorageFileNotFoundException("Could not read file: $fileName")
-        }
-    } catch (e: MalformedURLException) {
-        throw StorageFileNotFoundException("Could not read file: $fileName", e)
-    }
-
-    override fun deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
-    }
 }

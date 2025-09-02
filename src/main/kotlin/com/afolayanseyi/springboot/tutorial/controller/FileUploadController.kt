@@ -1,24 +1,18 @@
 package com.afolayanseyi.springboot.tutorial.controller
 
-import com.afolayanseyi.springboot.tutorial.configuration.UploadDirectory
 import com.afolayanseyi.springboot.tutorial.exception.StorageFileNotFoundException
 import com.afolayanseyi.springboot.tutorial.service.FileStorageService
-import org.springframework.core.io.Resource
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import java.io.IOException
-import java.util.stream.Collectors
+import java.util.*
+
 
 @Controller
 class FileUploadController(
@@ -37,39 +31,22 @@ class FileUploadController(
     fun handleNotFound(e: StorageFileNotFoundException): ResponseEntity<String> =
         ResponseEntity.notFound().build()
 
-    @PostMapping("/")
+    @PostMapping("/upload", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun createFile(
-        @RequestParam("file") file: MultipartFile,
-        redirectAttributes: RedirectAttributes
+        @RequestParam("files") files: List<MultipartFile>, redirectAttributes: RedirectAttributes
     ): String {
-        fileStorageService.saveFile(file)
-        redirectAttributes
-            .addFlashAttribute("message", "You successfully uploaded ${file.originalFilename}!")
+
+        files.forEach { file ->
+            fileStorageService.saveFile(file)
+        }
+
         return "redirect:/"
     }
 
-    @GetMapping("/$UploadDirectory/{fileName:.+}")
-    fun getFile(@PathVariable fileName: String): ResponseEntity<Resource> {
-        val file = fileStorageService.loadAsResources(fileName)
-        return ResponseEntity
-            .ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"${file.filename}\"")
-            .body(file)
-    }
 
     @GetMapping("/")
     @Throws(IOException::class)
     fun getFiles(model: Model): String {
-        model.addAttribute(
-            "files",
-            fileStorageService.loadAll().map { path ->
-                MvcUriComponentsBuilder.fromMethodName(
-                    FileUploadController::class.java,
-                    "getFile",
-                    path.fileName.toString()
-                ).build().toUriString()
-            }.collect(Collectors.toList())
-        )
         return "uploadForm"
     }
 }

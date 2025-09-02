@@ -11,20 +11,19 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties::class)
-class TutorialApplication {
+class DownloadHandlerApplication {
 
     @Bean
     fun init(storageService: FileStorageService): CommandLineRunner {
         return CommandLineRunner { args: Array<String?>? ->
-            storageService.deleteAll()
-            storageService.init()
+               storageService.init()
         }
     }
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            SpringApplication.run(TutorialApplication::class.java, *args)
+            SpringApplication.run(DownloadHandlerApplication::class.java, *args)
         }
     }
 }

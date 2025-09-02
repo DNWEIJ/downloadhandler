@@ -1,32 +1,47 @@
-<html xmlns:th="https://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Select multiple files using HTML Input tag
+    </title>
+    <style>
+        h1 {
+            color: green;
+        }
+
+        .container {
+            text-align: center;
+            width: 850px;
+            margin: 35px;
+        }
+
+        .property {
+            width: 400px ;
+            float: left;
+            border: 2px solid black;
+            padding: 10px;
+        }
+        .attribute {
+            width: 400px ;
+            float: right;
+            border: 2px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+
 <body>
-<h2>File upload demo</h2>
-<div th:if="${message}">
-    <h2 th:text="${message}"/>
-</div>
+<div class="container">
+        <p>
+            Input Multiple Files using Input Tag,
+        </p>
 
-<div>
-    <form method="POST" enctype="multipart/form-data" action="/">
-        <table>
-            <tr>
-                <td>File to upload:</td>
-                <td><input type="file" name="file"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Upload"/></td>
-            </tr>
-        </table>
-    </form>
-</div>
-
-<div>
-    <ul>
-        <li th:each="file : ${files}">
-            <a th:href="${file}" th:text="${file}"/>
-        </li>
-    </ul>
-</div>
-
+        <form action="/upload" enctype="multipart/form-data"  method="post">
+            <label for="files">Select a file:</label>
+            <input type="file" id="files" name="files" multiple>
+            <input type="submit" value="Upload"/>
+        </form>
+    </div>
 </body>
 </html>
