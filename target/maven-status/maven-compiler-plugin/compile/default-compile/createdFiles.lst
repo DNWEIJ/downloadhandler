@@ -1,1 +1,12 @@
+com\dwe\springboot\tutorial\configuration\CarProperties.class
+com\dwe\springboot\tutorial\controller\FileUploadController.class
+com\dwe\springboot\tutorial\DownloadHandlerApplication.class
+com\dwe\springboot\tutorial\configuration\StorageProperties.class
+com\dwe\springboot\tutorial\service\FileCarStorageServiceImpl.class
+com\dwe\springboot\tutorial\controller\CarController.class
+com\dwe\springboot\tutorial\model\CarEntity.class
 com\dwe\springboot\tutorial\security\SecurityConfig.class
+com\dwe\springboot\tutorial\service\FileStorageService.class
+com\dwe\springboot\tutorial\service\FileCarStorageService.class
+com\dwe\springboot\tutorial\service\FileStorageServiceImpl.class
+com\dwe\springboot\tutorial\CarRepository.class

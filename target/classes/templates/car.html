@@ -21,18 +21,18 @@
 </head>
 <body>
 <main class="container">
-    <form action="/car" method="post">
+    <form action="/car" method="post" name="car">
         <fieldset>
-            <input id="datum" type="date" name="date" required aria-label="Date">
+            <input id="datum" type="date" name="driveDate" required aria-label="Date">
         </fieldset>
         <fieldset>
             <legend>Auto selecteren:</legend>
             <label>
-                <input type="radio" name="car" value="VW" checked aria-checked="true"/>
+                <input type="radio" name="carType" value="VW" checked aria-checked="true"/>
                 VW
             </label>
             <label>
-                <input type="radio" name="car" value="Toyota"/>
+                <input type="radio" name="carType" value="Toyota"/>
                 Toyota
             </label>
         </fieldset>
@@ -52,17 +52,8 @@
             </label>
         </fieldset>
         <fieldset>
-            <fieldset>
-                <label>
-                    <input name="kids" type="checkbox" role="switch" value="noKidsRun"/>
-                    Kids run?
-                </label>
-            </fieldset>
-
-        </fieldset>
-        <fieldset>
             <input
-                    name="km_total"
+                    name="kmTotal"
                     type="number"
                     placeholder="eind totaal"
                     required
@@ -71,7 +62,7 @@
                     aria-required="true"
             />
             <input
-                    name="km_gereden"
+                    name="km"
                     type="number"
                     placeholder="km gereden"
                     required

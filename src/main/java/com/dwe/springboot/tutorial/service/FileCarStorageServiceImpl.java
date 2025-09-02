@@ -1,26 +1,28 @@
 package com.dwe.springboot.tutorial.service;
 
 
+import com.dwe.springboot.tutorial.CarRepository;
 import com.dwe.springboot.tutorial.configuration.CarProperties;
-import com.dwe.springboot.tutorial.model.CarRecord;
+import com.dwe.springboot.tutorial.model.CarEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 @Service
-public class FileCarStorageServiceImpl {
+public class FileCarStorageServiceImpl implements FileCarStorageService {
     private final CarProperties properties;
+//    private final CarRepository carRepository;
 
-    FileCarStorageServiceImpl(CarProperties properties) {
+    FileCarStorageServiceImpl(CarProperties properties, CarRepository carRepository) {
         this.properties = properties;
+//        this.carRepository = carRepository;
     }
 
 
-    void  init() {
+    public void  init() {
         try {
             Path rootLocation = Paths.get(properties.location());
             Files.createDirectories(rootLocation);
@@ -35,11 +37,15 @@ public class FileCarStorageServiceImpl {
         }
     }
 
-    void saveRecord(CarRecord car) throws IOException {
-
-        Files.writeString(
-            Paths.get(properties.location() + "/" + properties.file()),
-            car.toString() + System.lineSeparator(), StandardOpenOption.APPEND
-        );
+    public void saveRecord(CarEntity car)  {
+//        carRepository.save(car);
+//        try {
+//            Files.writeString(
+//                Paths.get(properties.location() + "/" + properties.file()),
+//                car.toString() + System.lineSeparator(), StandardOpenOption.APPEND
+//            );
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

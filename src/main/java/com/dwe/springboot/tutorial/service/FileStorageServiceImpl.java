@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class FileStorageServiceImpl {
+public class FileStorageServiceImpl implements FileStorageService {
     private final StorageProperties properties;
 
     FileStorageServiceImpl(StorageProperties properties) {
@@ -21,7 +21,7 @@ public class FileStorageServiceImpl {
     }
 
 
-    void init() {
+    public void init() {
         try {
             Path rootLocation = Paths.get(properties.location());
             Files.createDirectories(rootLocation);
@@ -30,7 +30,7 @@ public class FileStorageServiceImpl {
         }
     }
 
-    String saveFile(MultipartFile file) {
+    public void saveFile(MultipartFile file) {
         try {
             Path rootLocation = Paths.get(properties.location());
             String originalFilename = Boolean.parseBoolean(file.getOriginalFilename()) ? file.getOriginalFilename() : "";
@@ -47,7 +47,7 @@ public class FileStorageServiceImpl {
 
             InputStream inputStream = file.getInputStream();
             Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-            return StringUtils.cleanPath(originalFilename);
+            StringUtils.cleanPath(originalFilename);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

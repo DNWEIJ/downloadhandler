@@ -18,13 +18,13 @@ class DownloadHandlerApplication implements CommandLineRunner {
     @Autowired
     FileCarStorageService carService;
 
+    public static void main(String[] args) {
+        SpringApplication.run(DownloadHandlerApplication.class, args);
+    }
+
     @Override
     public void run(String... args) {
         storageService.init();
         carService.init();
-    }
-
-    static void main(String[] args) {
-        SpringApplication.run(DownloadHandlerApplication.class, args);
     }
 }

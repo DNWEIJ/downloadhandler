@@ -1,9 +1,11 @@
 package com.dwe.springboot.tutorial.service;
 
-import com.dwe.springboot.tutorial.model.CarRecord;
+import com.dwe.springboot.tutorial.model.CarEntity;
+
 
 public interface FileCarStorageService {
     void init();
-    void saveRecord(CarRecord car);
+
+    void saveRecord(CarEntity car);
 
 }

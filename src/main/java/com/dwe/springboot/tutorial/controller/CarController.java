@@ -1,10 +1,12 @@
 package com.dwe.springboot.tutorial.controller;
 
-import com.dwe.springboot.tutorial.model.CarRecord;
+import com.dwe.springboot.tutorial.model.CarEntity;
 import com.dwe.springboot.tutorial.service.FileCarStorageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,8 +33,8 @@ class CarController {
     }
 
     @PostMapping("/car")
-    String saveCarRecord(@ModelAttribute("car") CarRecord car) {
-        if (car.km() > 0 && car.kmTotal() > 0 && !car.person().isEmpty() && !car.date().isEmpty()) {
+    String saveCarRecord(@ModelAttribute("car") CarEntity car, BindingResult result, ModelMap model) {
+        if (car.isValid()) {
             carService.saveRecord(car);
             return "redirect:/car";
         } else {
@@ -42,6 +44,6 @@ class CarController {
 
     @GetMapping("/car")
     String getCarRecord(){
-        return "car";
+        return "car.html";
     }
 }

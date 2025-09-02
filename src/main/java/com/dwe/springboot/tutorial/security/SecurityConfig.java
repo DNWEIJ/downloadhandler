@@ -1,5 +1,6 @@
 package com.dwe.springboot.tutorial.security;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebSecurity
 @Configuration
@@ -23,13 +24,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home").permitAll()
+                        .requestMatchers("/login","/templates/**","/static/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
+                .formLogin(withDefaults())
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
@@ -39,8 +37,8 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
+                        .username("ItIsMe12!")
+                        .password("drivingMyBestCar!")
                         .roles("USER")
                         .build();
 
