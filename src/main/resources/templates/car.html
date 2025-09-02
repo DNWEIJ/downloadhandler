@@ -23,6 +23,10 @@
 <main class="container">
     <form action="/car" method="post" name="car">
         <fieldset>
+            <legend>Bestuurder:</legend>
+            <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
+        </fieldset>
+        <fieldset>
             <input id="datum" type="date" name="driveDate" required aria-label="Date">
         </fieldset>
         <fieldset>
@@ -34,21 +38,6 @@
             <label>
                 <input type="radio" name="carType" value="Toyota"/>
                 Toyota
-            </label>
-        </fieldset>
-        <fieldset>
-            <legend>Bestuurder:</legend>
-            <label>
-                <input type="radio" name="person" value="Maria" checked aria-checked="true"/>
-                Maria
-            </label>
-            <label>
-                <input type="radio" name="person" value="Daniel" />
-                Daniel
-            </label>
-            <label>
-                <input type="radio" name="person" value="Suzanne"/>
-                Suzanne
             </label>
         </fieldset>
         <fieldset>

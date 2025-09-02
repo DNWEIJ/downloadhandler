@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -27,14 +26,14 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
     }
 
 
-    public void  init() {
+    public void init() {
         try {
             Path rootLocation = Paths.get(properties.location());
             Files.createDirectories(rootLocation);
             Files.createFile(Paths.get(properties.location() + "/" + properties.file()));
         } catch (IOException exception) {
-            if (exception instanceof  java.nio.file.FileAlreadyExistsException) {
-                return;
+            if (exception instanceof java.nio.file.FileAlreadyExistsException) {
+                //
             } else {
                 throw new RuntimeException("Could not initialize storage");
             }
@@ -42,12 +41,20 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
         }
     }
 
-    public void saveRecord(CarEntity car)  {
+    public void saveRecord(CarEntity car) {
+        try {
+            Files.writeString(
+                    Paths.get(properties.location() + "/" + properties.file()),
+                    car.toString() + System.lineSeparator(), StandardOpenOption.APPEND
+            );
+        } catch (IOException e) {
+            // no action
+        }
         carRepository.save(car);
     }
 
     @Override
-    public List <String> getAll() {
+    public List<String> getAll() {
         Iterable<CarEntity> carEntities = carRepository.findAll();
         carEntities.forEach(car -> System.out.println(car.toString()));
 

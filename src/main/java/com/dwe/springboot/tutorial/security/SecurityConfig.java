@@ -36,17 +36,17 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         return new InMemoryUserDetailsManager(
                 User.withDefaultPasswordEncoder()
-                        .username("maria")
+                        .username("Maria")
                         .password("drivingSporty!")
                         .roles("USER")
                         .build(),
                 User.withDefaultPasswordEncoder()
-                        .username("daniel")
+                        .username("Daniel")
                         .password("Daniel0904!")
                         .roles("ADMIN")
                         .build(),
                 User.withDefaultPasswordEncoder()
-                        .username("suzanne")
+                        .username("Suzanne")
                         .password("drivingWithoutPetrol!")
                         .roles("USER")
                         .build());

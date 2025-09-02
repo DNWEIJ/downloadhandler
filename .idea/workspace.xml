@@ -5,16 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1c739ec-e045-4b7e-8ad8-4302505c0cd9" name="Changes" comment="rewrite to java and maven">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/controller/CarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/model/CarEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/model/CarEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/service/FileCarStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/service/FileCarStorageService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/service/FileCarStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tutorial/service/FileCarStorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/build-info.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/build-info.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/build-info.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pico/pico.amber.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pico/pico.blue.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pico/pico.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/car.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/uploadForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +276,7 @@
       <workItem from="1756820827433" duration="15000" />
       <workItem from="1756820855620" duration="512000" />
       <workItem from="1756821595697" duration="749000" />
-      <workItem from="1756822366728" duration="17161000" />
+      <workItem from="1756822366728" duration="19430000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -303,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756844458662</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="rewrite to java and maven">
+      <option name="closed" value="true" />
+      <created>1756848425044</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756848425044</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
