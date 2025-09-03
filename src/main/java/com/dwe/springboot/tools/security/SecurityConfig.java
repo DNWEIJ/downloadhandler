@@ -1,4 +1,4 @@
-package com.dwe.springboot.tutorial.security;
+package com.dwe.springboot.tools.security;
 
 
 import org.springframework.context.annotation.Bean;

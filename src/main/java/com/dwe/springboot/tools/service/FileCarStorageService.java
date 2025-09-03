@@ -1,6 +1,6 @@
-package com.dwe.springboot.tutorial.service;
+package com.dwe.springboot.tools.service;
 
-import com.dwe.springboot.tutorial.model.CarEntity;
+import com.dwe.springboot.tools.model.CarEntity;
 
 import java.util.List;
 

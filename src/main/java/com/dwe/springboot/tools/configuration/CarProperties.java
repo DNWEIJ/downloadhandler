@@ -1,4 +1,4 @@
-package com.dwe.springboot.tutorial.configuration;
+package com.dwe.springboot.tools.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

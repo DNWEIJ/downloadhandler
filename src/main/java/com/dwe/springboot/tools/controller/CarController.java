@@ -1,7 +1,7 @@
-package com.dwe.springboot.tutorial.controller;
+package com.dwe.springboot.tools.controller;
 
-import com.dwe.springboot.tutorial.model.CarEntity;
-import com.dwe.springboot.tutorial.service.FileCarStorageService;
+import com.dwe.springboot.tools.model.CarEntity;
+import com.dwe.springboot.tools.service.FileCarStorageService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

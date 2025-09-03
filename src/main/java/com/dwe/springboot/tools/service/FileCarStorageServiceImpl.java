@@ -1,9 +1,9 @@
-package com.dwe.springboot.tutorial.service;
+package com.dwe.springboot.tools.service;
 
 
-import com.dwe.springboot.tutorial.CarRepository;
-import com.dwe.springboot.tutorial.configuration.CarProperties;
-import com.dwe.springboot.tutorial.model.CarEntity;
+import com.dwe.springboot.tools.CarRepository;
+import com.dwe.springboot.tools.configuration.CarProperties;
+import com.dwe.springboot.tools.model.CarEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

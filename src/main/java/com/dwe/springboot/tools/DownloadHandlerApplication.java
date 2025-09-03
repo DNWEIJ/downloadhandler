@@ -1,8 +1,8 @@
-package com.dwe.springboot.tutorial;
+package com.dwe.springboot.tools;
 
 
-import com.dwe.springboot.tutorial.service.FileCarStorageService;
-import com.dwe.springboot.tutorial.service.FileStorageService;
+import com.dwe.springboot.tools.service.FileCarStorageService;
+import com.dwe.springboot.tools.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

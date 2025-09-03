@@ -1,7 +1,9 @@
-package com.dwe.springboot.tutorial.model;
+package com.dwe.springboot.tools.model;
 
 
 import jakarta.persistence.*;
+
+import static java.lang.StringTemplate.STR;
 
 @Entity
 public class CarEntity {

@@ -1,6 +1,6 @@
-package com.dwe.springboot.tutorial;
+package com.dwe.springboot.tools;
 
-import com.dwe.springboot.tutorial.model.CarEntity;
+import com.dwe.springboot.tools.model.CarEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
