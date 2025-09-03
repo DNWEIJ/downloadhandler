@@ -8,9 +8,13 @@ import java.util.List;
 public interface FileCarStorageService {
     void init();
 
-    void saveRecord(CarEntity car);
+    Long saveRecord(CarEntity car);
 
-    List<String> getAll();
+    List<String> getAllAsCsv();
 
     void deleteCarRecords();
+
+    String getHtmlStringOf(Long id);
+
+    List<CarEntity> getAllAsList(String name);
 }

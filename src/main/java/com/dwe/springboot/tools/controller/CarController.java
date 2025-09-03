@@ -7,12 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -35,10 +37,16 @@ class CarController {
         return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ModelAttribute
+    public void addAttributes(Model model, Authentication authentication) {
+        model.addAttribute("role", ((User) authentication.getPrincipal()).getAuthorities().toString());
+    }
+
     @PostMapping("/car")
-    String saveCarRecord(@ModelAttribute("car") CarEntity car) {
+    String saveCarRecord(@ModelAttribute("car") CarEntity car, RedirectAttributes redirect) {
         if (car.isValid()) {
-            carService.saveRecord(car);
+            Long id = carService.saveRecord(car);
+            redirect.addFlashAttribute("successAction", carService.getHtmlStringOf(id));
             return "redirect:/success";
         } else {
             return "redirect:/error";
@@ -56,13 +64,26 @@ class CarController {
         return "success.html";
     }
 
+
+    @GetMapping("/car/alluser")
+    public String getCarList(Model model, Authentication authentication) {
+        List<CarEntity> list = carService.getAllAsList(authentication.getName());
+        model.addAttribute("cars", list);
+        model.addAttribute("kmTotal",
+                list.stream()
+                        .map(CarEntity::getKm).map(Long::valueOf)
+                        .reduce(0L, Long::sum)
+        );
+        return "listcars.html";
+    }
+
     @GetMapping("/car/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getCarRecordList() {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "application/vnd.ms-excel");
         responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
-        List<String> data = carService.getAll();
+        List<String> data = carService.getAllAsCsv();
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
     }
 
@@ -72,7 +93,7 @@ class CarController {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "application/vnd.ms-excel");
         responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
-        List<String> data = carService.getAll();
+        List<String> data = carService.getAllAsCsv();
         carService.deleteCarRecords();
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
     }

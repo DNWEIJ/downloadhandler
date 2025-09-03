@@ -1,46 +1,29 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="pico/pico.min.css">
-    <title>Maintain car registration</title>
-    <style>
-        :root {
-            --pico-border-radius: 2rem;
-            --pico-typography-spacing-vertical: 1.5rem;
-            --pico-form-element-spacing-vertical: 1rem;
-            --pico-form-element-spacing-horizontal: 1.25rem;
-
-        }
-        button {
-            --pico-font-weight: 700;
-        }
-    </style>
-</head>
-<body>
+<div th:replace="fragments/header"></div>
 <main class="container">
     <form action="/car" method="post" name="car">
         <fieldset>
-            <legend>Bestuurder:</legend>
+            <legend></legend>
+            <label>
             <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
-        </fieldset>
-        <fieldset>
-            <input id="datum" type="date" name="driveDate" required aria-label="Date">
-        </fieldset>
-        <fieldset>
+            </label>
             <legend>Auto selecteren:</legend>
             <label>
                 <input type="radio" name="carType" value="VW" checked aria-checked="true"/>
                 VW
-            </label>
-            <label>
                 <input type="radio" name="carType" value="Toyota"/>
                 Toyota
             </label>
         </fieldset>
         <fieldset>
+            <input
+                    name="driveDate"
+                    type="date"
+                    placeholder="datum"
+                    required
+                    aria-label="Date"
+                    aria-required="true"
+                    id="datum"
+            />
             <input
                     name="kmTotal"
                     type="number"
@@ -67,9 +50,8 @@
         />
     </form>
 </main>
-</body>
-</html>
+<div th:replace="fragments/footer"></div>
 <script>
     // Insert date and time into HTML
-    document.getElementById("datum").valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+    document.getElementById("datum").valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
 </script>

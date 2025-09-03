@@ -3,8 +3,6 @@ package com.dwe.springboot.tools.model;
 
 import jakarta.persistence.*;
 
-import static java.lang.StringTemplate.STR;
-
 @Entity
 public class CarEntity {
     @Id
@@ -23,15 +21,19 @@ public class CarEntity {
 
     @Override
     public String toString() {
-        return STR."\{driveDate};\{carType};\{person};\{kmTotal};\{km};";
+        return driveDate + ";" + carType + ";" + person + ";" + kmTotal + ";" + km + ";";
+    }
+
+    public String toHtmlString() {
+        return person + " drove: " + carType + " at " + driveDate + " for: " + km + " km";
     }
 
     public boolean isValid() {
-        if (!driveDate.isEmpty() && !carType.isEmpty() && !person.isEmpty() && kmTotal != 0 && km != 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return !driveDate.isEmpty()
+                && !carType.isEmpty()
+                && !person.isEmpty()
+                && kmTotal != 0
+                && km != 0;
     }
 
     public String getDriveDate() {

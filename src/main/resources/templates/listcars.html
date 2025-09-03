@@ -1,0 +1,30 @@
+<div th:replace="fragments/header"></div>
+<main class="container">
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">date</th>
+            <th scope="col">Car</th>
+            <th scope="col">KM</th>
+            <th scope="col">KM Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <tr th:each="car: ${cars}">
+            <td scope="col" th:text="${car.driveDate}" />
+            <td scope="col" th:text="${car.carType}" />
+            <td scope="col" th:text="${car.km}" />
+            <td scope="col" th:text="${car.kmTotal}" />
+        </tr>
+        <tfoot>
+        <tr>
+            <td scope="col"></td>
+            <td scope="col">Total:</td>
+            <td  scope="col" th:text="${kmTotal}" />
+            <td scope="col"></td>
+        </tr>
+        </tfoot>
+    </table>
+</main>
+<div th:replace="fragments/footer"></div>

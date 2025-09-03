@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
+@EnableMethodSecurity
 class DownloadHandlerApplication implements CommandLineRunner {
 
     @Autowired
@@ -18,7 +20,7 @@ class DownloadHandlerApplication implements CommandLineRunner {
     @Autowired
     FileCarStorageService carService;
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DownloadHandlerApplication.class, args);
     }
 

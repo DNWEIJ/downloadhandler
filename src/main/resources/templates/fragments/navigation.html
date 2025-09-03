@@ -1,0 +1,13 @@
+<main class="container">
+    <nav>
+        <ul>
+            <li><strong>DWE Holding &copy;</strong></li>
+        </ul>
+        <ul>
+            <li><a href="/car">Car</a></li>
+            <li th:if="${role == '[ROLE_ADMIN]'}"><a href="/car/all">Overview</a></li>
+            <li th:if="${role == '[ROLE_USER]'}"><a href="/car/alluser">Overview</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</main>

@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -33,15 +34,14 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
             Files.createFile(Paths.get(properties.location() + "/" + properties.file()));
         } catch (IOException exception) {
             if (exception instanceof java.nio.file.FileAlreadyExistsException) {
-                //
-            } else {
-                throw new RuntimeException("Could not initialize storage");
+                return;
             }
+            throw new RuntimeException("Could not initialize storage");
 
         }
     }
 
-    public void saveRecord(CarEntity car) {
+    public Long saveRecord(CarEntity car) {
         try {
             Files.writeString(
                     Paths.get(properties.location() + "/" + properties.file()),
@@ -50,11 +50,11 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
         } catch (IOException e) {
             // no action
         }
-        carRepository.save(car);
+        return carRepository.save(car).getId();
     }
 
     @Override
-    public List<String> getAll() {
+    public List<String> getAllAsCsv() {
         Iterable<CarEntity> carEntities = carRepository.findAll();
         carEntities.forEach(car -> System.out.println(car.toString()));
 
@@ -66,5 +66,16 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
     @Override
     public void deleteCarRecords() {
         carRepository.deleteAll();
+    }
+
+    @Override
+    public String getHtmlStringOf(Long id) {
+        Optional<CarEntity> car = carRepository.findById(id);
+        return (car.isPresent()) ? car.get().toHtmlString() : "";
+    }
+
+    @Override
+    public List<CarEntity> getAllAsList(String name) {
+        return carRepository.findByPersonOrderByDriveDateAsc(name);
     }
 }
