@@ -20,7 +20,7 @@ class DownloadHandlerApplication implements CommandLineRunner {
     @Autowired
     FileCarStorageService carService;
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(DownloadHandlerApplication.class, args);
     }
 
