@@ -20,7 +20,7 @@ spring:
   datasource:
     name: carinformation
     driverClassName: org.hsqldb.jdbc.JDBCDriver
-    url: jdbc:hsqldb:file:~/carInformation/carInformation;sql.syntax_mys=true
+    url: jdbc:hsqldb:file:~/carInformation/database/carInformation;sql.syntax_mys=true
     username: SA
   jpa:
     database: hsql

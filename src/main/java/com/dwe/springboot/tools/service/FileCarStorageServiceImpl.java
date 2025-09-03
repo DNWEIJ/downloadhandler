@@ -86,6 +86,7 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
 
     @Override
     public Integer getLatestTotal(String carType) {
-        return carRepository.findFirstByCarTypeOrderByIdAsc(carType).getKmTotal();
+        CarEntity car = carRepository.findFirstByCarTypeOrderByIdAsc(carType);
+        return (car==null) ? 0 : car.getKmTotal();
     }
 }
