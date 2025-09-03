@@ -67,23 +67,18 @@ class CarController {
 
     @GetMapping("/car/alluser")
     public String getCarList(Model model, Authentication authentication) {
+        List<CarEntity> list;
         if (authentication.getAuthorities().contains("ROL_ADMIN")) {
-            List<CarEntity> list = carService.getAllAsList();
-            model.addAttribute("cars", list);
-            model.addAttribute("kmTotal",
-                    list.stream()
-                            .map(CarEntity::getKm).map(Long::valueOf)
-                            .reduce(0L, Long::sum)
-            );
+            list = carService.getAllAsList();
         } else {
-            List<CarEntity> list = carService.getAllAsList(authentication.getName());
-            model.addAttribute("cars", list);
-            model.addAttribute("kmTotal",
-                    list.stream()
-                            .map(CarEntity::getKm).map(Long::valueOf)
-                            .reduce(0L, Long::sum)
-            );
+            list = carService.getAllAsList(authentication.getName());
         }
+        model.addAttribute("cars", list);
+        model.addAttribute("kmTotal",
+                list.stream()
+                        .map(CarEntity::getKm).map(Long::valueOf)
+                        .reduce(0L, Long::sum)
+        );
         return "listcars.html";
     }
 
