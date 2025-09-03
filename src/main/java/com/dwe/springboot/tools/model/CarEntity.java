@@ -14,6 +14,18 @@ public class CarEntity {
     String person;
     int kmTotal;
     int km;
+    @Column(name="petrol",columnDefinition = "bit default 0")
+    boolean petrol;
+    @Column(name="liters",columnDefinition = "integer default 0")
+    int liters;
+
+    @Transient
+    public String getLitersStr() {
+        return (liters == 0 ? "" : Integer.toString(liters));
+    }
+    public void setLitersStr(String yearStr) {
+        this.liters = (yearStr.isEmpty() ? 0 : Integer.parseInt(yearStr));
+    }
 
     public CarEntity() {
     }
@@ -21,11 +33,14 @@ public class CarEntity {
 
     @Override
     public String toString() {
-        return driveDate + ";" + carType + ";" + person + ";" + kmTotal + ";" + km + ";";
+        return driveDate + ";" + carType + ";" + person + ";" + kmTotal + ";" + km + ";" + petrol + ";"+ liters + ";";
     }
 
     public String toHtmlString() {
-        return person + " drove: " + carType + " at " + driveDate + " for: " + km + " km";
+        if (petrol) {
+            return person + " drove:<br/>" + carType + " at " + driveDate + "<br/>for: " + km + " km and tanked: " + liters;
+        }
+        return person + " drove:<br/>" + carType + " at " + driveDate + "<br/>for: " + km + " km";
     }
 
     public boolean isValid() {
@@ -34,6 +49,22 @@ public class CarEntity {
                 && !person.isEmpty()
                 && kmTotal != 0
                 && km != 0;
+    }
+
+    public boolean getPetrol() {
+        return petrol;
+    }
+
+    public void setPetrol(boolean petrol) {
+        this.petrol = petrol;
+    }
+
+    public int getLiters() {
+        return liters;
+    }
+
+    public void setLiters(int liters) {
+        this.liters = liters;
     }
 
     public String getDriveDate() {

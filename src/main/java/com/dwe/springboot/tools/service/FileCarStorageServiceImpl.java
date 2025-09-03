@@ -56,8 +56,6 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
     @Override
     public List<String> getAllAsCsv() {
         Iterable<CarEntity> carEntities = carRepository.findAll();
-        carEntities.forEach(car -> System.out.println(car.toString()));
-
         return StreamSupport.stream(carEntities.spliterator(), false)
                 .map(CarEntity::toString)
                 .collect(Collectors.toList());
@@ -84,5 +82,10 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
         return StreamSupport
                 .stream( carRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer getLatestTotal(String carType) {
+        return carRepository.findFirstByCarTypeOrderByIdAsc(carType).getKmTotal();
     }
 }

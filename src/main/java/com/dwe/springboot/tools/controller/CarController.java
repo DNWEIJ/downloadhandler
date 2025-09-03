@@ -17,30 +17,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Controller
 class CarController {
-    final FileCarStorageService carService;
 
-    CarController(FileCarStorageService carService) {
-        this.carService = carService;
-    }
 
-    @ExceptionHandler(NoSuchElementException.class)
-    ResponseEntity<String> handleNotFound(NoSuchElementException e) {
-        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    ResponseEntity<String> handleNotFound(IllegalArgumentException e) {
-        return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ModelAttribute
-    public void addAttributes(Model model, Authentication authentication) {
-        model.addAttribute("role", ((User) authentication.getPrincipal()).getAuthorities().toString());
+    public enum CarType {
+        VW,
+        Toyota
     }
 
     @PostMapping("/car")
@@ -54,26 +39,21 @@ class CarController {
         }
     }
 
+
     @GetMapping("/car")
-    String getCarRecord(Model model, Authentication authentication) {
-        model.addAttribute("person", authentication.getName());
+    String getCarRecord(Model model) {
+        model.addAttribute("carTypes", CarType.values());
+        Map<String, Integer> carsPreviousTotal = new HashMap<>();
+        carsPreviousTotal.put(CarType.VW.name(), carService.getLatestTotal(CarType.VW.name()));
+        carsPreviousTotal.put(CarType.Toyota.name(), carService.getLatestTotal(CarType.Toyota.name()));
+        model.addAttribute("carsPreviousTotal", carsPreviousTotal);
         return "car.html";
     }
-
-    @GetMapping("/success")
-    String getSuccess() {
-        return "success.html";
-    }
-
 
     @GetMapping("/car/alluser")
     public String getCarList(Model model, Authentication authentication) {
         List<CarEntity> list;
-        if (
-                authentication.getAuthorities()
-                        .contains(new SimpleGrantedAuthority("ROLE_ADMIN")
-                        )
-        ) {
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             list = carService.getAllAsList();
         } else {
             list = carService.getAllAsList(authentication.getName());
@@ -82,6 +62,11 @@ class CarController {
         model.addAttribute("kmTotal",
                 list.stream()
                         .map(CarEntity::getKm).map(Long::valueOf)
+                        .reduce(0L, Long::sum)
+        );
+        model.addAttribute("litersTotal",
+                list.stream()
+                        .map(CarEntity::getLiters).map(Long::valueOf)
                         .reduce(0L, Long::sum)
         );
         return "listcars.html";
@@ -107,4 +92,38 @@ class CarController {
         carService.deleteCarRecords();
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
     }
+
+    // ***************
+    // plumbing
+    // ***************
+    final FileCarStorageService carService;
+
+    CarController(FileCarStorageService carService) {
+        this.carService = carService;
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    ResponseEntity<String> handleNotFound(NoSuchElementException e) {
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<String> handleNotFound(IllegalArgumentException e) {
+        return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ModelAttribute
+    public void addAttributes(Model model, Authentication authentication) {
+        model.addAttribute("person", authentication.getName());
+        model.addAttribute("role", ((User) authentication.getPrincipal()).getAuthorities().toString());
+    }
+
+    @GetMapping("/success")
+    String getSuccess(Model model) {
+        model.addAttribute("imagesrc",
+        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExczF4d2NnbGRodGNyeGNjdXR4NHg4cGtkMGJzYXZwbjBsam9kYzM1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q81NcsY6YxK7jxnr4v/giphy.gif"
+        );
+        return "success.html";
+    }
+
 }

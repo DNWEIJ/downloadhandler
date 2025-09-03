@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1c739ec-e045-4b7e-8ad8-4302505c0cd9" name="Changes" comment="Add overview for user">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/CarRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/controller/CarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/model/CarEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/model/CarEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/service/FileCarStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/service/FileCarStorageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/service/FileCarStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/service/FileCarStorageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/listcars.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/listcars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/success.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +284,7 @@
       <workItem from="1756880508784" duration="52000" />
       <workItem from="1756880573986" duration="130000" />
       <workItem from="1756880777815" duration="177000" />
-      <workItem from="1756880965325" duration="18772000" />
+      <workItem from="1756880965325" duration="30408000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -388,7 +398,23 @@
       <option name="project" value="LOCAL" />
       <updated>1756902287304</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add overview for user">
+      <option name="closed" value="true" />
+      <created>1756902592113</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1756902592113</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Add overview for user">
+      <option name="closed" value="true" />
+      <created>1756902789994</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1756902789994</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,6 +461,23 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/model/CarEntity.java</url>
           <line>47</line>
           <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/controller/CarController.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/templates/car.html</url>
+          <line>83</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/templates/car.html</url>
+          <line>86</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

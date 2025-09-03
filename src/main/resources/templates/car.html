@@ -6,12 +6,13 @@
             <label>
             <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
             </label>
-            <legend>Auto selecteren:</legend>
+            <legend>Select a car:</legend>
             <label>
-                <input type="radio" name="carType" value="VW" checked aria-checked="true"/>
-                VW
-                <input type="radio" name="carType" value="Toyota"/>
-                Toyota
+                <span th:each="car: ${carsPreviousTotal}">
+                  <input type="radio" name="carType" th:value="${car.key}" th:text="${car.key}" checked aria-checked="true" ></input>
+                    (<span id="previous" th:text="${car.value}"></span>)
+                    &nbsp;&nbsp;
+                </span>
             </label>
         </fieldset>
         <fieldset>
@@ -32,6 +33,7 @@
                     pattern="[09]*"
                     aria-label="eind totaal"
                     aria-required="true"
+                    min="0"
             />
             <input
                     name="km"
@@ -41,9 +43,23 @@
                     pattern="[09]*"
                     aria-label="km gereden"
                     aria-required="true"
+                    min="0"
             />
         </fieldset>
-
+        <fieldset>
+            <label>
+                <input name="petrol" type="checkbox" role="switch"/>
+                filled her up?
+            </label>
+            <input
+                    name="litersStr"
+                    type="number"
+                    placeholder="liters"
+                    pattern="[09]*"
+                    aria-label="liters"
+                    min="0"
+            />
+        </fieldset>
         <input
                 type="submit"
                 value="Opslaan"
@@ -54,4 +70,24 @@
 <script>
     // Insert date and time into HTML
     document.getElementById("datum").valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
+
+    // Define the API URL
+    const apiUrl = '/car/total/';
+
+    function getPreviousValue(carType) {
+        // Make a GET request
+        fetch(apiUrl + carType)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
 </script>

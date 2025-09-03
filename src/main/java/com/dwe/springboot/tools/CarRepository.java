@@ -10,4 +10,6 @@ import java.util.List;
 public interface CarRepository extends CrudRepository<CarEntity, Long> {
 
     List<CarEntity> findByPersonOrderByDriveDateAsc(String name);
+
+    CarEntity findFirstByCarTypeOrderByIdAsc(String carType);
 }

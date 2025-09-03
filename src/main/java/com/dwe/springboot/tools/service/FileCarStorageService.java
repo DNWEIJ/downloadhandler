@@ -18,4 +18,6 @@ public interface FileCarStorageService {
 
     List<CarEntity> getAllAsList(String name);
     List<CarEntity> getAllAsList();
+
+    Integer getLatestTotal(String name);
 }

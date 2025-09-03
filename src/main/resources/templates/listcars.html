@@ -6,8 +6,10 @@
             <th scope="col">date</th>
             <th scope="col">Person</th>
             <th scope="col">Car</th>
-            <th scope="col">KM</th>
-            <th scope="col">KM Total</th>
+            <th scope="col">km</th>
+            <th scope="col">km total</th>
+            <th scope="col">gasoline?</th>
+            <th scope="col">liters</th>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +20,8 @@
             <td scope="col" th:text="${car.carType}" />
             <td scope="col" th:text="${car.km}" />
             <td scope="col" th:text="${car.kmTotal}" />
+            <td scope="col" th:text="${car.petrol}" />
+            <td scope="col" th:text="${car.liters}" />
         </tr>
         <tfoot>
         <tr>
@@ -26,6 +30,8 @@
             <td scope="col">Total:</td>
             <td  scope="col" th:text="${kmTotal}" />
             <td scope="col"></td>
+            <td scope="col"></td>
+            <td  scope="col" th:text="${litersTotal}" />
         </tr>
         </tfoot>
     </table>
