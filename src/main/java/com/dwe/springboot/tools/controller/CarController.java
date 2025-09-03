@@ -67,13 +67,23 @@ class CarController {
 
     @GetMapping("/car/alluser")
     public String getCarList(Model model, Authentication authentication) {
-        List<CarEntity> list = carService.getAllAsList(authentication.getName());
-        model.addAttribute("cars", list);
-        model.addAttribute("kmTotal",
-                list.stream()
-                        .map(CarEntity::getKm).map(Long::valueOf)
-                        .reduce(0L, Long::sum)
-        );
+        if (authentication.getAuthorities().contains("ROL_ADMIN")) {
+            List<CarEntity> list = carService.getAllAsList();
+            model.addAttribute("cars", list);
+            model.addAttribute("kmTotal",
+                    list.stream()
+                            .map(CarEntity::getKm).map(Long::valueOf)
+                            .reduce(0L, Long::sum)
+            );
+        } else {
+            List<CarEntity> list = carService.getAllAsList(authentication.getName());
+            model.addAttribute("cars", list);
+            model.addAttribute("kmTotal",
+                    list.stream()
+                            .map(CarEntity::getKm).map(Long::valueOf)
+                            .reduce(0L, Long::sum)
+            );
+        }
         return "listcars.html";
     }
 
@@ -81,7 +91,7 @@ class CarController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getCarRecordList() {
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add("Content-Type", "application/vnd.ms-excel");
+        responseHeaders.add("Content-Type", "text/csv");
         responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
         List<String> data = carService.getAllAsCsv();
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
@@ -91,7 +101,7 @@ class CarController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteCarRecordList() {
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add("Content-Type", "application/vnd.ms-excel");
+        responseHeaders.add("Content-Type", "text/csv");
         responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
         List<String> data = carService.getAllAsCsv();
         carService.deleteCarRecords();

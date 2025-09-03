@@ -78,4 +78,11 @@ public class FileCarStorageServiceImpl implements FileCarStorageService {
     public List<CarEntity> getAllAsList(String name) {
         return carRepository.findByPersonOrderByDriveDateAsc(name);
     }
+
+    @Override
+    public List<CarEntity> getAllAsList() {
+        return StreamSupport
+                .stream( carRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
 }

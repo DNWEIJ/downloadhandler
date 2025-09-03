@@ -17,4 +17,5 @@ public interface FileCarStorageService {
     String getHtmlStringOf(Long id);
 
     List<CarEntity> getAllAsList(String name);
+    List<CarEntity> getAllAsList();
 }
