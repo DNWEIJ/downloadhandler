@@ -6,7 +6,7 @@
             <label>
             <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
             </label>
-            <legend>Select a car:</legend>
+            <legend>Welke auto:</legend>
             <label>
                 <span th:each="car: ${carsPreviousTotal}">
                   <input type="radio" name="carType" th:value="${car.key}" th:text="${car.key}" checked aria-checked="true" ></input>
@@ -19,16 +19,16 @@
             <input
                     name="driveDate"
                     type="date"
-                    placeholder="datum"
+                    placeholder="Datum"
                     required
-                    aria-label="Date"
+                    aria-label="Datum"
                     aria-required="true"
                     id="datum"
             />
             <input
                     name="kmTotal"
                     type="number"
-                    placeholder="eind totaal"
+                    placeholder="Eind Totaal km"
                     required
                     pattern="[09]*"
                     aria-label="eind totaal"
@@ -38,10 +38,10 @@
             <input
                     name="km"
                     type="number"
-                    placeholder="km gereden"
+                    placeholder="Gereden km"
                     required
                     pattern="[09]*"
-                    aria-label="km gereden"
+                    aria-label="Gereden km"
                     aria-required="true"
                     min="0"
             />
@@ -49,12 +49,12 @@
         <fieldset>
             <label>
                 <input name="petrol" type="checkbox" role="switch"/>
-                filled her up?
+                getankt?
             </label>
             <input
                     name="litersStr"
                     type="number"
-                    placeholder="liters"
+                    placeholder="Liters"
                     pattern="[09]*"
                     aria-label="liters"
                     min="0"
@@ -70,24 +70,4 @@
 <script>
     // Insert date and time into HTML
     document.getElementById("datum").valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
-
-    // Define the API URL
-    const apiUrl = '/car/total/';
-
-    function getPreviousValue(carType) {
-        // Make a GET request
-        fetch(apiUrl + carType)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
 </script>
