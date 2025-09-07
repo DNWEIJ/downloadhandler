@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d1c739ec-e045-4b7e-8ad8-4302505c0cd9" name="Changes" comment="Add overview for user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/trip.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/trip.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -217,7 +218,7 @@
       <workItem from="1756880573986" duration="130000" />
       <workItem from="1756880777815" duration="177000" />
       <workItem from="1756880965325" duration="33826000" />
-      <workItem from="1757054683874" duration="23755000" />
+      <workItem from="1757054683874" duration="25269000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -395,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757251396685</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add overview for user">
+      <option name="closed" value="true" />
+      <created>1757267575728</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1757267575728</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

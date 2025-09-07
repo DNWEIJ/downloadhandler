@@ -1,11 +1,9 @@
 <div th:replace="fragments/header"></div>
 <form action="/trip" method="post" name="car">
     <fieldset>
-        <legend></legend>
         <label>
             <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
         </label>
-        <legend>Welke auto:</legend>
         <label>
                 <span th:each="car: ${carsPreviousTotal}">
                   <input
@@ -70,24 +68,37 @@
                     min="0"
             />
         </fieldset>
-    <fieldset>
-        <label>
-            <input name="petrol" type="checkbox" role="switch"/>
-            getankt?
-        </label>
+
+        <fieldset>
+            <table  style="border-spacing: 0">
+                <tr>
+                    <td>
+                        <label for="litersStr">Getankt?</label>
+                    </td>
+                    <td>
+                        <input name="petrol" type="checkbox" role="switch"/>
+                    </td>
+                    <td>
+                        <input
+                                name="litersStr"
+                                id="litersStr"
+                                type="number"
+                                placeholder="Liters"
+                                pattern="[09]*"
+                                aria-label="liters"
+                                min="0"
+                        />
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset>
         <input
-                name="litersStr"
-                type="number"
-                placeholder="Liters"
-                pattern="[09]*"
-                aria-label="liters"
-                min="0"
+                type="submit"
+                value="Opslaan"
         />
+        </fieldset>
     </fieldset>
-    <input
-            type="submit"
-            value="Opslaan"
-    />
 </form>
 <div th:replace="fragments/footer"></div>
 <script>
@@ -101,7 +112,7 @@
         kmsDriven = totalKmsDriven - totalOfCar
         document.getElementById("km").setAttribute('value', (kmsDriven));
         // set amount
-        document.getElementById("bedrag").setAttribute('value',( "€ " + (kmsDriven *.10).toLocaleString()));
+        document.getElementById("bedrag").setAttribute('value', ("€ " + (kmsDriven * .10).toLocaleString()));
     }
 
 </script>
