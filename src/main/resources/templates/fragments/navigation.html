@@ -1,13 +1,13 @@
-<main class="container">
-    <nav>
-        <ul>
-            <li><strong>DWE Holding &copy;</strong></li>
-        </ul>
-        <ul>
-            <li><a href="/car">Auto</a></li>
-            <li th:if="${role == '[ROLE_ADMIN]'}"><a href="/car/all">Volledig Overzicht</a></li>
-            <li><a href="/car/alluser">Overzicht</a></li>
-            <li><a href="/logout">Afmelden</a></li>
-        </ul>
-    </nav>
-</main>
+<nav role="menu">
+    <label data-role="burger"><input type="checkbox"/></label>
+    <ul role="menubar">
+        <li><strong>DWE Holding &copy;</strong></li>
+    </ul>
+    <ul role="menuitem">
+        <li th:if="${role == '[ROLE_ADMIN]'}"><a href="/car">Car</a></li>
+        <li><a href="/trip">Trip</a></li>
+        <li th:if="${role == '[ROLE_ADMIN]'}"><a href="/trip/all">Volledig Overzicht</a></li>
+        <li><a href="/trip/alluser">Overzicht</a></li>
+        <li><a href="/logout">Afmelden</a></li>
+    </ul>
+</nav>

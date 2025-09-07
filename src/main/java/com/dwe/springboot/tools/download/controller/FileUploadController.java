@@ -1,6 +1,6 @@
-package com.dwe.springboot.tools.controller;
+package com.dwe.springboot.tools.download.controller;
 
-import com.dwe.springboot.tools.service.FileStorageService;
+import com.dwe.springboot.tools.download.service.FileStorageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

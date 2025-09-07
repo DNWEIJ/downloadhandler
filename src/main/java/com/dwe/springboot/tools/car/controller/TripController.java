@@ -1,7 +1,8 @@
-package com.dwe.springboot.tools.controller;
+package com.dwe.springboot.tools.car.controller;
 
-import com.dwe.springboot.tools.model.CarEntity;
-import com.dwe.springboot.tools.service.FileCarStorageService;
+import com.dwe.springboot.tools.car.model.TripEntity;
+import com.dwe.springboot.tools.car.service.CarService;
+import com.dwe.springboot.tools.car.service.DriveService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,19 +21,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.*;
 
 @Controller
-class CarController {
+class TripController {
 
+    @PostMapping("/trip")
+    String saveCarRecord(@ModelAttribute("car") TripEntity drive, RedirectAttributes redirect) {
+        if (drive.isValid()) {
+            Long id = driveService.saveRecord(drive);
+            carService.saveRecord(drive);
 
-    public enum CarType {
-        VW,
-        Toyota
-    }
-
-    @PostMapping("/car")
-    String saveCarRecord(@ModelAttribute("car") CarEntity car, RedirectAttributes redirect) {
-        if (car.isValid()) {
-            Long id = carService.saveRecord(car);
-            redirect.addFlashAttribute("successAction", carService.getHtmlStringOf(id));
+            redirect.addFlashAttribute("successAction", driveService.getHtmlStringOf(id));
             return "redirect:/success";
         } else {
             return "redirect:/error";
@@ -40,65 +37,64 @@ class CarController {
     }
 
 
-    @GetMapping("/car")
+    @GetMapping("/trip")
     String getCarRecord(Model model) {
-        model.addAttribute("carTypes", CarType.values());
-        Map<String, Integer> carsPreviousTotal = new HashMap<>();
-        carsPreviousTotal.put(CarType.VW.name(), carService.getLatestTotal(CarType.VW.name()));
-        carsPreviousTotal.put(CarType.Toyota.name(), carService.getLatestTotal(CarType.Toyota.name()));
-        model.addAttribute("carsPreviousTotal", carsPreviousTotal);
-        return "car.html";
+        model.addAttribute("carTypes", carService.getAllNames());
+        model.addAttribute("carsPreviousTotal", carService.getAllNameAndTotalKm());
+        return "trip.html";
     }
 
-    @GetMapping("/car/alluser")
+    @GetMapping("/trip/alluser")
     public String getCarList(Model model, Authentication authentication) {
-        List<CarEntity> list;
+        List<TripEntity> list;
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            list = carService.getAllAsList();
+            list = driveService.getAllAsList();
         } else {
-            list = carService.getAllAsList(authentication.getName());
+            list = driveService.getAllAsList(authentication.getName());
         }
-        model.addAttribute("cars", list);
+        model.addAttribute("trips", list);
         model.addAttribute("kmTotal",
                 list.stream()
-                        .map(CarEntity::getKm).map(Long::valueOf)
+                        .map(TripEntity::getKm).map(Long::valueOf)
                         .reduce(0L, Long::sum)
         );
         model.addAttribute("litersTotal",
                 list.stream()
-                        .map(CarEntity::getLiters).map(Long::valueOf)
+                        .map(TripEntity::getLiters).map(Long::valueOf)
                         .reduce(0L, Long::sum)
         );
-        return "listcars.html";
+        return "listtrips.html";
     }
 
-    @GetMapping("/car/all")
+    @GetMapping("/trip/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getCarRecordList() {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "text/csv");
         responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
-        List<String> data = carService.getAllAsCsv();
+        List<String> data = driveService.getAllAsCsv();
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
     }
 
-    @GetMapping("/car/delete")
+    @GetMapping("/trip/delete")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteCarRecordList() {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "text/csv");
         responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
-        List<String> data = carService.getAllAsCsv();
-        carService.deleteCarRecords();
+        List<String> data = driveService.getAllAsCsv();
+        driveService.deleteCarRecords();
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
     }
 
     // ***************
     // plumbing
     // ***************
-    final FileCarStorageService carService;
+    final DriveService driveService;
+    final CarService carService;
 
-    CarController(FileCarStorageService carService) {
+    TripController(DriveService driveService, CarService carService) {
+        this.driveService = driveService;
         this.carService = carService;
     }
 

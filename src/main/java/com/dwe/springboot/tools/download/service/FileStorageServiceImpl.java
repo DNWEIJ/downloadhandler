@@ -1,6 +1,6 @@
-package com.dwe.springboot.tools.service;
+package com.dwe.springboot.tools.download.service;
 
-import com.dwe.springboot.tools.configuration.StorageProperties;
+import com.dwe.springboot.tools.download.configuration.StorageProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;

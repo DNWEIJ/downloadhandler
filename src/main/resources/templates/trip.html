@@ -1,0 +1,107 @@
+<div th:replace="fragments/header"></div>
+<form action="/trip" method="post" name="car">
+    <fieldset>
+        <legend></legend>
+        <label>
+            <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
+        </label>
+        <legend>Welke auto:</legend>
+        <label>
+                <span th:each="car: ${carsPreviousTotal}">
+                  <input
+                          type="radio"
+                          name="carType"
+                          th:value="${car.key}"
+                          th:text="${car.key}" checked
+                          aria-checked="true"
+                          onclick="updateKmDriven(document.getElementById('km').valueAsNumber)"
+                  />
+                    (<span id="previous" th:text="${car.value}"></span>)
+                  &nbsp;&nbsp;
+                </span>
+        </label>
+    </fieldset>
+    <fieldset>
+        <input
+                name="driveDate"
+                id="datum"
+                type="date"
+                placeholder="Datum"
+                required
+                aria-label="Datum"
+                aria-required="true"
+        />
+        <fieldset>
+            <input
+                    name="kmTotal"
+                    id="kmTotal"
+                    type="number"
+                    placeholder="Eind Totaal km"
+                    required
+                    pattern="[09]*"
+                    aria-label="eind totaal"
+                    aria-required="true"
+                    min="0"
+                    onchange="updateKmDriven(this.valueAsNumber)"
+            />
+        </fieldset>
+
+        <fieldset class="grid">
+            <input
+                    name="km"
+                    id="km"
+                    type="number"
+                    placeholder="Gereden km"
+                    required
+                    pattern="[09]*"
+                    aria-label="Gereden km"
+                    aria-required="true"
+                    min="0"
+            />
+            <input
+                    name="bedrag"
+                    id="bedrag"
+                    type="text"
+                    disabled
+                    tabindex=-1
+                    placeholder="bedrag ex benzine"
+                    pattern="[09]*"
+                    aria-label="bedrag"
+                    min="0"
+            />
+        </fieldset>
+    <fieldset>
+        <label>
+            <input name="petrol" type="checkbox" role="switch"/>
+            getankt?
+        </label>
+        <input
+                name="litersStr"
+                type="number"
+                placeholder="Liters"
+                pattern="[09]*"
+                aria-label="liters"
+                min="0"
+        />
+    </fieldset>
+    <input
+            type="submit"
+            value="Opslaan"
+    />
+</form>
+<div th:replace="fragments/footer"></div>
+<script>
+    // Insert date and time into HTML
+    document.getElementById("datum").valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
+
+    function updateKmDriven(totalKmsDriven) {
+        if (Number.isNaN(totalKmsDriven)) return
+
+        totalOfCar = parseInt(document.querySelector('input[name="carType"]:checked').nextElementSibling.innerHTML);
+        kmsDriven = totalKmsDriven - totalOfCar
+        document.getElementById("km").setAttribute('value', (kmsDriven));
+        // set amount
+        document.getElementById("bedrag").setAttribute('value',( "€ " + (kmsDriven *.10).toLocaleString()));
+    }
+
+</script>

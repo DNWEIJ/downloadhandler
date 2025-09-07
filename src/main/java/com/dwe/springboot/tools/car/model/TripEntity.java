@@ -1,10 +1,10 @@
-package com.dwe.springboot.tools.model;
+package com.dwe.springboot.tools.car.model;
 
 
 import jakarta.persistence.*;
 
-@Entity
-public class CarEntity {
+@Entity(name = "car_entity")
+public class TripEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,15 +19,17 @@ public class CarEntity {
     @Column(name="liters",columnDefinition = "integer default 0")
     int liters;
 
-    @Transient
-    public String getLitersStr() {
-        return (liters == 0 ? "" : Integer.toString(liters));
-    }
-    public void setLitersStr(String yearStr) {
-        this.liters = (yearStr.isEmpty() ? 0 : Integer.parseInt(yearStr));
+    private TripEntity(Builder builder) {
+        setDriveDate(builder.driveDate);
+        setCarType(builder.carType);
+        setPerson(builder.person);
+        setKmTotal(builder.kmTotal);
+        setKm(builder.km);
+        setPetrol(builder.petrol);
+        setLiters(builder.liters);
     }
 
-    public CarEntity() {
+    public TripEntity() {
     }
 
 
@@ -49,6 +51,15 @@ public class CarEntity {
                 && !person.isEmpty()
                 && kmTotal != 0
                 && km != 0;
+    }
+
+
+    @Transient
+    public String getLitersStr() {
+        return (liters == 0 ? "" : Integer.toString(liters));
+    }
+    public void setLitersStr(String yearStr) {
+        this.liters = (yearStr.isEmpty() ? 0 : Integer.parseInt(yearStr));
     }
 
     public boolean getPetrol() {
@@ -114,5 +125,67 @@ public class CarEntity {
 
     public void setKm(int km) {
         this.km = km;
+    }
+
+    public static final class Builder {
+        private Long id;
+        private String driveDate;
+        private String carType;
+        private String person;
+        private int kmTotal;
+        private int km;
+        private boolean petrol;
+        private int liters;
+
+        private Builder() {
+        }
+
+        public static Builder newBuilder() {
+            return new Builder();
+        }
+
+        public Builder id(Long val) {
+            id = val;
+            return this;
+        }
+
+        public Builder driveDate(String val) {
+            driveDate = val;
+            return this;
+        }
+
+        public Builder carType(String val) {
+            carType = val;
+            return this;
+        }
+
+        public Builder person(String val) {
+            person = val;
+            return this;
+        }
+
+        public Builder kmTotal(int val) {
+            kmTotal = val;
+            return this;
+        }
+
+        public Builder km(int val) {
+            km = val;
+            return this;
+        }
+
+        public Builder petrol(boolean val) {
+            petrol = val;
+            return this;
+        }
+
+        public Builder liters(int val) {
+            liters = val;
+            return this;
+        }
+
+        public TripEntity build() {
+            return new TripEntity(this);
+        }
     }
 }
