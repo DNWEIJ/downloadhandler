@@ -11,8 +11,6 @@ public interface CarService {
 
     List<String> getAllAsCsv();
 
-    void deleteCarRecords();
-
     List<CarEntity> getAllAsList();
 
     List<String> getAllNames();

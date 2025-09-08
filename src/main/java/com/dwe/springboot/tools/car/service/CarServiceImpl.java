@@ -21,21 +21,12 @@ public class CarServiceImpl implements CarService {
         this.carRepository = carRepository;
     }
 
-    public Long saveRecord(CarEntity car) {
-        return carRepository.save(car).getId();
-    }
-
     @Override
     public List<String> getAllAsCsv() {
         Iterable<CarEntity> carEntities = carRepository.findAll();
         return StreamSupport.stream(carEntities.spliterator(), false)
                 .map(CarEntity::toString)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void deleteCarRecords() {
-        carRepository.deleteAll();
     }
 
     @Override
@@ -56,7 +47,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void saveRecord(TripEntity drive) {
-        carRepository.findByName(drive.getCarType());
+        CarEntity car = carRepository.findByName(drive.getCarType());
+        car.setKmTotal(drive.getKmTotal());
+        carRepository.save(car);
     }
 
     @Override

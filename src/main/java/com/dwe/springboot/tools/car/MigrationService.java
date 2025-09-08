@@ -1,6 +1,5 @@
 package com.dwe.springboot.tools.car;
 
-import com.dwe.springboot.tools.car.model.CarEntity;
 import com.dwe.springboot.tools.car.repo.CarRepository;
 import com.dwe.springboot.tools.car.repo.DriveRepository;
 import org.springframework.stereotype.Service;
@@ -17,25 +16,6 @@ public class MigrationService {
     }
 
     public void init() {
-        long count = carRepository.count();
-        if (count == 0) {
-            carRepository.save(
-                    CarEntity.Builder.builder()
-                            .name("VW")
-                            .kmTotal(driveRepository.findFirstByCarTypeOrderByKmTotalDesc("VW").getKmTotal())
-                            .insurancePerYear(33600)
-                            .roadTaxPerYear(96000)
-                            .build()
-            );
-
-            carRepository.save(
-                    CarEntity.Builder.builder()
-                            .name("Toyota")
-                            .kmTotal(driveRepository.findFirstByCarTypeOrderByKmTotalDesc("Toyota").getKmTotal())
-                            .insurancePerYear(33384)
-                            .roadTaxPerYear(29600)
-                            .build()
-            );
-        }
+        // no migration to execute
     }
 }

@@ -4,20 +4,23 @@
         <label>
             <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
         </label>
-        <label>
-                <span th:each="car: ${carsPreviousTotal}">
-                  <input
-                          type="radio"
-                          name="carType"
-                          th:value="${car.key}"
-                          th:text="${car.key}" checked
-                          aria-checked="true"
-                          onclick="updateKmDriven(document.getElementById('km').valueAsNumber)"
-                  />
+        <fieldset  role="group">
+            <th:block th:each="car : ${carsPreviousTotal}">
+                <label>
+                    <input
+                            type="radio"
+                            name="carType"
+                            th:value="${car.key}"
+                            th:text="${car.key}" checked
+                            aria-checked="true"
+                            onclick="updateKmDriven(document.getElementById('km').valueAsNumber)"
+                    />
                     (<span id="previous" th:text="${car.value}"></span>)
-                  &nbsp;&nbsp;
-                </span>
-        </label>
+                    &nbsp;&nbsp;
+                </label>
+            </th:block>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </fieldset>
     </fieldset>
     <fieldset>
         <input
@@ -70,7 +73,7 @@
         </fieldset>
 
         <fieldset>
-            <table  style="border-spacing: 0">
+            <table style="border-spacing: 0">
                 <tr>
                     <td>
                         <label for="litersStr">Getankt?</label>
@@ -93,14 +96,16 @@
             </table>
         </fieldset>
         <fieldset>
-        <input
-                type="submit"
-                value="Opslaan"
-        />
+            <input
+                    type="submit"
+                    value="Opslaan"
+            />
         </fieldset>
     </fieldset>
 </form>
+
 <div th:replace="fragments/footer"></div>
+
 <script>
     // Insert date and time into HTML
     document.getElementById("datum").valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
@@ -114,5 +119,4 @@
         // set amount
         document.getElementById("bedrag").setAttribute('value', ("€ " + (kmsDriven * .10).toLocaleString()));
     }
-
 </script>

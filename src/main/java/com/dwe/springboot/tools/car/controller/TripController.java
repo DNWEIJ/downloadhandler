@@ -76,16 +76,6 @@ class TripController {
         return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
     }
 
-    @GetMapping("/trip/delete")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> deleteCarRecordList() {
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add("Content-Type", "text/csv");
-        responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
-        List<String> data = driveService.getAllAsCsv();
-        driveService.deleteCarRecords();
-        return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
-    }
 
     // ***************
     // plumbing
