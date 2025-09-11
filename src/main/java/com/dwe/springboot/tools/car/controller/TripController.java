@@ -6,7 +6,6 @@ import com.dwe.springboot.tools.car.service.DriveService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,7 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 class TripController {
@@ -67,13 +67,14 @@ class TripController {
     }
 
     @GetMapping("/trip/all")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getCarRecordList() {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "text/csv");
-        responseHeaders.add("Content-Disposition", "attachment; filename=cars.csv");
-        List<String> data = driveService.getAllAsCsv();
-        return new ResponseEntity<>(data.stream().reduce((a, b) -> a + "\n" + b).get(), responseHeaders, HttpStatus.OK);
+        responseHeaders.add("Content-Disposition", "attachment; filename=trips.csv");
+        return new ResponseEntity<>(
+                driveService.getAllAsCsv().stream().reduce((a, b) -> a + "\r\n" + b).get(),
+                responseHeaders,
+                HttpStatus.OK);
     }
 
 
@@ -107,7 +108,7 @@ class TripController {
     @GetMapping("/success")
     String getSuccess(Model model) {
         model.addAttribute("imagesrc",
-        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExczF4d2NnbGRodGNyeGNjdXR4NHg4cGtkMGJzYXZwbjBsam9kYzM1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q81NcsY6YxK7jxnr4v/giphy.gif"
+                "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExczF4d2NnbGRodGNyeGNjdXR4NHg4cGtkMGJzYXZwbjBsam9kYzM1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q81NcsY6YxK7jxnr4v/giphy.gif"
         );
         return "success.html";
     }
