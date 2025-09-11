@@ -7,9 +7,6 @@
     <list default="true" id="d1c739ec-e045-4b7e-8ad8-4302505c0cd9" name="Changes" comment="fix car save and change list page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car/editcar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car/editcar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/navigation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +223,7 @@
       <workItem from="1757406902062" duration="15000" />
       <workItem from="1757407024530" duration="3563000" />
       <workItem from="1757422746423" duration="3942000" />
-      <workItem from="1757572569029" duration="443000" />
+      <workItem from="1757572569029" duration="2689000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -436,7 +433,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757321539090</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fix car save and change list page">
+      <option name="closed" value="true" />
+      <created>1757573144040</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1757573144040</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +487,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java</url>
-          <line>33</line>
+          <line>43</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

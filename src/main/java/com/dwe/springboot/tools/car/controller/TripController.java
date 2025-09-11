@@ -23,6 +23,15 @@ import java.util.NoSuchElementException;
 @Controller
 class TripController {
 
+    private final String[] gifies = {
+            "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjZzNnl4Z2t6NGxuZnRkandheDB0NjhtbWVvazR3OWd2MWZhbTZwNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XreQmk7ETCak0/giphy.gif",
+            "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTJxcHllcDcwejRvYmFza2xxNHE5NTBwOGl2eWVmdjNsNm53bHhpcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7kO9VZjCv3FkI/giphy.gif",
+            "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2lyOXlpbTJnd3Y0Y2VoeTc5d3NibTY2NXBrZjVmb3l5c3I4aWhjbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1GTZA4flUzQI0/giphy.gif",
+            "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzR0cTQwdzE2bWdnbDQzeWYzaXJ1Y2N2ZnBqdHJqeHFzYXJjMHViNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CvZuv5m5cKl8c/giphy.gif",
+            "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzV3MHEwZWt6eG5oOTY0ODJpd2FheTJvMWFnbHVoaDhwbnNxODU2eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8xSnw21AM7OQo/giphy.gif"
+    };
+    private int counter = 0;
+
     @PostMapping("/trip")
     String saveCarRecord(@ModelAttribute("car") TripEntity drive, RedirectAttributes redirect) {
         if (drive.isValid()) {
@@ -30,6 +39,7 @@ class TripController {
             carService.saveRecord(drive);
 
             redirect.addFlashAttribute("successAction", driveService.getHtmlStringOf(id));
+
             return "redirect:/success";
         } else {
             return "redirect:/error";
@@ -107,9 +117,7 @@ class TripController {
 
     @GetMapping("/success")
     String getSuccess(Model model) {
-        model.addAttribute("imagesrc",
-                "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExczF4d2NnbGRodGNyeGNjdXR4NHg4cGtkMGJzYXZwbjBsam9kYzM1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q81NcsY6YxK7jxnr4v/giphy.gif"
-        );
+        model.addAttribute("imagesrc", gifies[counter++ % 5]);
         return "success.html";
     }
 
