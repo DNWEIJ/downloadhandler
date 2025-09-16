@@ -11,40 +11,41 @@
     </label>
 </fieldset>
 <fieldset>
-<table id="table">
-    <thead>
-    <tr>
-        <th scope="col">Datum</th>
-        <th th:if="${role == '[ROLE_ADMIN]'}" scope="col">Persoon</th>
-        <th scope="col">Auto</th>
-        <th scope="col">km</th>
-        <th scope="col">km totaal</th>
-        <th scope="col">Liters</th>
-        <th scope="col">amount</th>
-    </tr>
-    </thead>
-    <tbody>
+    <table id="table">
+        <thead>
+        <tr>
+            <th scope="col">Datum</th>
+            <th th:if="${role == '[ROLE_ADMIN]'}" scope="col">Persoon</th>
+            <th scope="col">Auto</th>
+            <th scope="col">km</th>
+            <th scope="col">km totaal</th>
+            <th scope="col">Liters</th>
+            <th scope="col">amount</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr th:each="trip: ${trips}">
-        <td scope="col" th:text="${trip.driveDate}"/>
-        <td scope="col" th:text="${trip.person}"/>
-        <td scope="col" th:text="${trip.carType}"/>
-        <td scope="col" th:text="${trip.km}"/>
-        <td scope="col" th:text="${trip.kmTotal}"/>
-        <td scope="col" th:text="${trip.liters}"/>
-        <td scope="col" th:text=  "'€ '+ ${trip.amount * 1.0 / 100}"/>
-    </tr>
-    <tfoot>
-    <tr>
-        <td scope="col"></td>
-        <td scope="col"/></td>
-        <td scope="col">Total:</td>
-        <td scope="col" th:text="${kmTotal}"/>
-        <td scope="col"></td>
-        <td scope="col" th:text="${litersTotal}"/>
-    </tr>
-    </tfoot>
-</table>
+        <tr th:each="trip: ${trips}">
+            <td scope="col" th:text="${trip.driveDate}"/>
+            <td scope="col" th:text="${trip.person}"/>
+            <td scope="col" th:text="${trip.carType}"/>
+            <td scope="col" th:text="${trip.km}"/>
+            <td scope="col" th:text="${trip.kmTotal}"/>
+            <td scope="col" th:text="${trip.liters}"/>
+            <td scope="col" th:text="'€ '+ ${trip.amount * 1.0 / 100}"/>
+        </tr>
+        <tfoot>
+        <tr>
+            <td scope="col"></td>
+            <td scope="col"/>
+            </td>
+            <td scope="col">Total:</td>
+            <td scope="col" th:text="${kmTotal}"/>
+            <td scope="col"></td>
+            <td scope="col" th:text="${litersTotal}"/>
+        </tr>
+        </tfoot>
+    </table>
 </fieldset>
 
 <th:block th:insert="~{fragments/footer}"></th:block>
@@ -74,16 +75,18 @@
 
     const recalculateTotal = () => {
 
-            const table = document.getElementById("table");
-            let totalLiters = 0;
-            let totalKm = 0;
+        const table = document.getElementById("table");
+        let totalLiters = 0;
+        let totalKm = 0;
 
-            // Skip header row (start at 1)
-            for (let i = 1; i < table.rows.length-2; i++) {
+        // Skip header row (start at 1)
+        for (let i = 1; i < table.rows.length - 2; i++) {
+            if (table.rows[i].style.display != 'none') {
                 totalKm += parseFloat(table.rows[i].cells[3].innerText.trim()) || 0;
                 totalLiters += parseFloat(table.rows[i].cells[5].innerText.trim()) || 0;
             }
-            table.rows[table.rows.length-1].cells[3].textContent = totalKm;
-        table.rows[table.rows.length-1].cells[5].textContent = totalLiters;
+        }
+        table.rows[table.rows.length - 1].cells[3].textContent = totalKm;
+        table.rows[table.rows.length - 1].cells[5].textContent = totalLiters;
     }
 </script>
