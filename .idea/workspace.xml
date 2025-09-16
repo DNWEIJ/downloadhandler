@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1c739ec-e045-4b7e-8ad8-4302505c0cd9" name="Changes" comment="fix car save and change list page">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/overview.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/model/TripEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/model/TripEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car/editcar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car/editcar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/listtrips.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/listtrips.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/trip.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/trip.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,55 +93,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build DownloadHandler.executor": "Run",
-    "Gradle.Build Tutorial.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.Tutorial [assemble].executor": "Debug",
-    "Gradle.Tutorial [bootJar].executor": "Debug",
-    "Gradle.Tutorial [build].executor": "Run",
-    "Gradle.Tutorial [clean].executor": "Run",
-    "Gradle.Tutorial [jar].executor": "Run",
-    "Gradle.Upgrade Gradle wrapper.executor": "Run",
-    "Kotlin.DownloadHandlerApplication.executor": "Debug",
-    "Maven.tools [clean].executor": "Run",
-    "Maven.tools [compile].executor": "Run",
-    "Maven.tools [org.springframework.boot:spring-boot-maven-plugin:3.5.5:run].executor": "Run",
-    "Maven.tools [package].executor": "Run",
-    "Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found": "New/updated database configurations found",
-    "Notification.DoNotAsk-DatabaseConfigFileWatcher.found": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.DownloadHandlerApplication (1).executor": "Debug",
-    "Spring Boot.DownloadHandlerApplication.executor": "Debug",
-    "Spring Boot.TutorialApplication.executor": "Debug",
-    "git-widget-placeholder": "change__car__to__rit__and__add__car",
-    "ignore.preview.features.used": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/workspace/DownloadHandler/src/main/resources/templates",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.build.tools.auto.reload": "ALL",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build DownloadHandler.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build Tutorial.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tutorial [assemble].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.Tutorial [bootJar].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.Tutorial [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tutorial [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tutorial [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Upgrade Gradle wrapper.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.DownloadHandlerApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.tools [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tools [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tools [org.springframework.boot:spring-boot-maven-plugin:3.5.5:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tools [package].executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;New/updated database configurations found&quot;,
+    &quot;Notification.DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DownloadHandlerApplication (1).executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.DownloadHandlerApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.TutorialApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;change__car__to__rit__and__add__car&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/workspace/DownloadHandler/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "hsqldb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;hsqldb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\workspace\DownloadHandler\src\main\resources\templates" />
@@ -235,7 +239,8 @@
       <workItem from="1757572569029" duration="2979000" />
       <workItem from="1757576469498" duration="1626000" />
       <workItem from="1758010388828" duration="674000" />
-      <workItem from="1758014671227" duration="12363000" />
+      <workItem from="1758014671227" duration="13522000" />
+      <workItem from="1758048513698" duration="4863000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -477,7 +482,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758015653927</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="fix car save and change list page">
+      <option name="closed" value="true" />
+      <created>1758027421917</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1758027421917</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix car save and change list page">
+      <option name="closed" value="true" />
+      <created>1758027457698</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1758027457698</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +544,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java</url>
-          <line>58</line>
+          <line>57</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -533,7 +554,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/dwe/springboot/tools/car/controller/TripController.java</url>
-          <line>51</line>
+          <line>50</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>

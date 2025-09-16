@@ -1,4 +1,4 @@
-<div th:replace="fragments/header"></div>
+<th:block th:insert="~{fragments/header}"></th:block>
 <form action="/trip" method="post" name="car">
      <fieldset>
         <input
@@ -53,7 +53,7 @@
             value="Opslaan"
     />
 </form>
-<div th:replace="fragments/footer"></div>
+<th:block th:insert="~{fragments/footer}"></th:block>
 <script>
     // Insert date and time into HTML
     document.getElementById("datum").valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;

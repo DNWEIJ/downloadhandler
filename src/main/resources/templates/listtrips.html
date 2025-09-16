@@ -1,4 +1,4 @@
-<div th:replace="fragments/header"></div>
+<th:block th:insert="~{fragments/header}"></th:block>
 
 <fieldset>
     <label>
@@ -6,7 +6,7 @@
                 type="text"
                 id="filterInput"
                 onkeyup="myFunction()"
-                placeholder="Filter on car"
+                placeholder="Filter on car or person"
                 title="Type car name">
     </label>
 </fieldset>
@@ -27,17 +27,17 @@
 
     <tr th:each="trip: ${trips}">
         <td scope="col" th:text="${trip.driveDate}"/>
-        <td th:if="${role == '[ROLE_ADMIN]'}" scope="col" th:text="${trip.person}"/>
+        <td scope="col" th:text="${trip.person}"/>
         <td scope="col" th:text="${trip.carType}"/>
         <td scope="col" th:text="${trip.km}"/>
         <td scope="col" th:text="${trip.kmTotal}"/>
         <td scope="col" th:text="${trip.liters}"/>
-        <td scope="col" th:text="${trip.amount}"/>
+        <td scope="col" th:text=  "'€ '+ ${trip.amount * 1.0 / 100}"/>
     </tr>
     <tfoot>
     <tr>
         <td scope="col"></td>
-        <td th:if="${role == '[ROLE_ADMIN]'}" scope="col"/>
+        <td scope="col"/></td>
         <td scope="col">Total:</td>
         <td scope="col" th:text="${kmTotal}"/>
         <td scope="col"></td>
@@ -47,7 +47,7 @@
 </table>
 </fieldset>
 
-<div th:replace="fragments/footer"></div>
+<th:block th:insert="~{fragments/footer}"></th:block>
 
 <script>
     const myFunction = () => {
@@ -57,11 +57,10 @@
         ]
         const filterColumns = columns.filter(c => c.isFilter).map(c => c.index)
         const trs = document.querySelectorAll('#table tbody tr')
-
         const filter = document.querySelector('#filterInput').value
         const regex = new RegExp(escape(filter), 'i')
         const isFoundInTds = td => regex.test(td.innerHTML)
-        console.log(isFoundInTds)
+
         const isFound = childrenArr => childrenArr.some(isFoundInTds)
         const setTrStyleDisplay = ({style, children}) => {
             style.display = isFound([
@@ -70,5 +69,21 @@
         }
 
         trs.forEach(setTrStyleDisplay)
+        recalculateTotal();
+    }
+
+    const recalculateTotal = () => {
+
+            const table = document.getElementById("table");
+            let totalLiters = 0;
+            let totalKm = 0;
+
+            // Skip header row (start at 1)
+            for (let i = 1; i < table.rows.length-2; i++) {
+                totalKm += parseFloat(table.rows[i].cells[3].innerText.trim()) || 0;
+                totalLiters += parseFloat(table.rows[i].cells[5].innerText.trim()) || 0;
+            }
+            table.rows[table.rows.length-1].cells[3].textContent = totalKm;
+        table.rows[table.rows.length-1].cells[5].textContent = totalLiters;
     }
 </script>

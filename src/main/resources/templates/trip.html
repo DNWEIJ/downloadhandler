@@ -1,4 +1,4 @@
-<div th:replace="fragments/header"></div>
+<th:block th:insert="~{fragments/header}"></th:block>
 <form action="/trip" method="post" name="car">
     <fieldset>
         <label>
@@ -97,8 +97,8 @@
                                 name="AmountStr"
                                 id="amountStr"
                                 type="number"
-                                placeholder="amount"
-                                pattern="[09.,]*"
+                                placeholder="amount (no '.' or ',')"
+                                pattern="[09]*"
                                 aria-label="amount"
                                 min="0"
                         />
@@ -115,7 +115,7 @@
     </fieldset>
 </form>
 
-<div th:replace="fragments/footer"></div>
+<th:block th:insert="~{fragments/footer}"></th:block>
 
 <script>
     // Insert date and time into HTML

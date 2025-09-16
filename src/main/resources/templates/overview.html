@@ -1,7 +1,17 @@
-<div th:replace="fragments/header"></div>
+<th:block th:insert="~{fragments/header}"></th:block>
+<style>
+    #table tbody:nth-child(even) tr td
+    {
+        background-color: lightsalmon;
+    }
 
+    #table tbody:nth-child(odd) tr td
+    {
+        background-color: lightyellow;
+    }
+</style>
 <fieldset>
     [(${fueloverview})]
 </fieldset>
 
-<div th:replace="fragments/footer"></div>
+<th:block th:insert="~{fragments/footer}"></th:block>

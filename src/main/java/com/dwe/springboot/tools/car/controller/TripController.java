@@ -29,7 +29,6 @@ class TripController {
             <thead>
             <tr><td>Daniel</td><td>Suzanne</td><td>Maria</td><td>Km</td><td>Liters</td><td>Amount</td></tr>
             </thead>
-            <tbody>
             """;
     String startRow = """
             <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>
@@ -112,6 +111,7 @@ class TripController {
             }
 
             if (tripEntity.getLiters() != 0) {
+                sb.append("<tbody>");
                 if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
                     int totalKms = totalVW - startVW;
                     float totalAmount = ((float)tripEntity.getAmount()) / 100;
@@ -151,11 +151,15 @@ class TripController {
                     totalAmount = totalT_Daniel = totalT_Suzanne = totalT_Maria = 0;
                     sb.append(startRow.formatted("", "", "", "", "", ""));
                 }
+                sb.append("</tbody>");
             }
         }
+        sb.append("<tbody>");
         sb.append(startRow.formatted("left over:", "", "", "", "", ""));
         sb.append(startRow.formatted(totalVW_Daniel, totalVW_Suzanne, totalVW_Maria, "VW", "", ""));
         sb.append(startRow.formatted(totalT_Daniel, totalT_Suzanne, totalT_Maria, "Toyota", "", ""));
+        sb.append("</tbody>");
+
         model.addAttribute("fueloverview", sb.append(endTable));
         return "overview.html";
     }
