@@ -18,8 +18,11 @@ public class TripEntity {
     boolean petrol;
     @Column(name="liters",columnDefinition = "integer default 0")
     int liters;
+    @Column(name="amount",columnDefinition = "integer default 0")
+    int amount;
 
     private TripEntity(Builder builder) {
+        setId(builder.id);
         setDriveDate(builder.driveDate);
         setCarType(builder.carType);
         setPerson(builder.person);
@@ -27,30 +30,33 @@ public class TripEntity {
         setKm(builder.km);
         setPetrol(builder.petrol);
         setLiters(builder.liters);
+        setAmount(builder.amount);
     }
 
     public TripEntity() {
+
     }
 
 
     @Override
     public String toString() {
-        return driveDate + ";" + carType + ";" + person + ";" + kmTotal + ";" + km + ";" + petrol + ";"+ liters + ";";
+        return driveDate + ";" + carType + ";" + person + ";" + kmTotal + ";" + km + ";" + petrol + ";"+ liters + ";" + amount + ";";
     }
 
     public String toHtmlString() {
         if (petrol) {
-            return person + " drove:<br/>" + carType + " at " + driveDate + "<br/>for: " + km + " km and tanked: " + liters;
+            return person + " drove:<br/>" + carType + " at " + driveDate + "<br/>for: " + km + " km and tanked: " + liters + "for " + amount;
         }
         return person + " drove:<br/>" + carType + " at " + driveDate + "<br/>for: " + km + " km";
     }
 
     public boolean isValid() {
-        return !driveDate.isEmpty()
-                && !carType.isEmpty()
-                && !person.isEmpty()
-                && kmTotal != 0
-                && km != 0;
+        return true;
+//        return !driveDate.isEmpty()
+//                && !carType.isEmpty()
+//                && !person.isEmpty()
+//                && kmTotal != 0
+//                && km != 0;
     }
 
 
@@ -58,32 +64,16 @@ public class TripEntity {
     public String getLitersStr() {
         return (liters == 0 ? "" : Integer.toString(liters));
     }
-    public void setLitersStr(String yearStr) {
-        this.liters = (yearStr.isEmpty() ? 0 : Integer.parseInt(yearStr));
+    public void setLitersStr(String liters) {
+        this.liters = (liters.isEmpty() ? 0 : Integer.parseInt(liters));
     }
 
-    public boolean getPetrol() {
-        return petrol;
+    @Transient
+    public String getAmountStr() {
+        return (amount == 0 ? "" : Integer.toString(amount));
     }
-
-    public void setPetrol(boolean petrol) {
-        this.petrol = petrol;
-    }
-
-    public int getLiters() {
-        return liters;
-    }
-
-    public void setLiters(int liters) {
-        this.liters = liters;
-    }
-
-    public String getDriveDate() {
-        return driveDate;
-    }
-
-    public void setDriveDate(String driveDate) {
-        this.driveDate = driveDate;
+    public void setAmountStr(String amount) {
+        this.amount = (amount.isEmpty() ? 0 : Integer.parseInt(amount));
     }
 
     public Long getId() {
@@ -94,13 +84,20 @@ public class TripEntity {
         this.id = id;
     }
 
+    public String getDriveDate() {
+        return driveDate;
+    }
+
+    public void setDriveDate(String driveDate) {
+        this.driveDate = driveDate;
+    }
 
     public String getCarType() {
         return carType;
     }
 
-    public void setCarType(String car) {
-        this.carType = car;
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 
     public String getPerson() {
@@ -127,6 +124,30 @@ public class TripEntity {
         this.km = km;
     }
 
+    public boolean getPetrol() {
+        return petrol;
+    }
+
+    public void setPetrol(boolean petrol) {
+        this.petrol = petrol;
+    }
+
+    public int getLiters() {
+        return liters;
+    }
+
+    public void setLiters(int liters) {
+        this.liters = liters;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public static final class Builder {
         private Long id;
         private String driveDate;
@@ -136,51 +157,57 @@ public class TripEntity {
         private int km;
         private boolean petrol;
         private int liters;
+        private int amount;
 
         private Builder() {
         }
 
-        public static Builder newBuilder() {
+        public static Builder builder() {
             return new Builder();
         }
 
-        public Builder id(Long val) {
-            id = val;
+        public Builder id(Long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder driveDate(String val) {
-            driveDate = val;
+        public Builder driveDate(String driveDate) {
+            this.driveDate = driveDate;
             return this;
         }
 
-        public Builder carType(String val) {
-            carType = val;
+        public Builder carType(String carType) {
+            this.carType = carType;
             return this;
         }
 
-        public Builder person(String val) {
-            person = val;
+        public Builder person(String person) {
+            this.person = person;
             return this;
         }
 
-        public Builder kmTotal(int val) {
-            kmTotal = val;
+        public Builder kmTotal(int kmTotal) {
+            this.kmTotal = kmTotal;
             return this;
         }
 
-        public Builder km(int val) {
-            km = val;
+        public Builder km(int km) {
+            this.km = km;
             return this;
         }
 
-        public Builder petrol(boolean val) {
-            petrol = val;
+        public Builder petrol(boolean petrol) {
+            this.petrol = petrol;
             return this;
         }
 
-        public Builder liters(int val) {
-            liters = val;
+        public Builder liters(int liters) {
+            this.liters = liters;
+            return this;
+        }
+
+        public Builder amount(int amount) {
+            this.amount = amount;
             return this;
         }
 
