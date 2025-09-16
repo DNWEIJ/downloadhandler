@@ -4,7 +4,7 @@
         <label>
             <input type="radio" name="person" th:value="${person}" th:text="${person}" checked aria-checked="true"/>
         </label>
-        <fieldset  role="group">
+        <fieldset role="group">
             <th:block th:each="car : ${carsPreviousTotal}">
                 <label>
                     <input
@@ -46,7 +46,6 @@
                     onchange="updateKmDriven(this.valueAsNumber)"
             />
         </fieldset>
-
         <fieldset role="group">
             <input
                     name="km"
@@ -73,38 +72,30 @@
         </fieldset>
 
         <fieldset>
-            <table style="border-spacing: 0">
-                <tr>
-                    <td>
-                        <label for="litersStr">Getankt?</label>
-                    </td>
-                    <td>
-                        <input name="petrol" type="checkbox" role="switch"/>
-                    </td>
-                    <td>
-                        <input
-                                name="litersStr"
-                                id="litersStr"
-                                type="number"
-                                placeholder="Liters"
-                                pattern="[09]*"
-                                aria-label="liters"
-                                min="0"
-                        />
-                    </td>
-                    <td>
-                        <input
-                                name="AmountStr"
-                                id="amountStr"
-                                type="number"
-                                placeholder="amount (no '.' or ',')"
-                                pattern="[09]*"
-                                aria-label="amount"
-                                min="0"
-                        />
-                    </td>
-                </tr>
-            </table>
+
+            <label for="litersStr">Getankt?</label>
+            <input name="petrol" type="checkbox" role="switch"/>
+        </fieldset>
+        <fieldset>
+            <input
+                    name="litersStr"
+                    id="litersStr"
+                    type="number"
+                    placeholder="Liters"
+                    pattern="[09]*"
+                    aria-label="liters"
+                    min="0"
+            />
+            <input
+                    name="AmountStr"
+                    id="amountStr"
+                    type="number"
+                    placeholder="amount (no '.' or ',')"
+                    pattern="[09]*"
+                    aria-label="amount"
+                    min="0"
+            />
+
         </fieldset>
         <fieldset>
             <input
