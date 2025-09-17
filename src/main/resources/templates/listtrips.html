@@ -1,21 +1,24 @@
 <th:block th:insert="~{fragments/header}"></th:block>
 
-<fieldset>
-    <label>
-        <input
-                type="text"
-                id="filterInput"
-                onkeyup="myFunction()"
-                placeholder="Filter on car or person"
-                title="Type car name">
-    </label>
+<fieldset role="group">
+    <input
+            type="text"
+            id="filterName"
+            placeholder="Filter on name">
+    <input
+            type="text"
+            id="filterCar"
+            placeholder="Filter on car">
+
+    <button id="clearBtn">Clear</button>
 </fieldset>
+
 <fieldset>
     <table id="table">
         <thead>
         <tr>
             <th scope="col">Datum</th>
-            <th th:if="${role == '[ROLE_ADMIN]'}" scope="col">Persoon</th>
+            <th scope="col">Persoon</th>
             <th scope="col">Auto</th>
             <th scope="col">km</th>
             <th scope="col">km totaal</th>
@@ -24,7 +27,6 @@
         </tr>
         </thead>
         <tbody>
-
         <tr th:each="trip: ${trips}">
             <td scope="col" th:text="${trip.driveDate}"/>
             <td scope="col" th:text="${trip.person}"/>
@@ -49,44 +51,70 @@
 </fieldset>
 
 <th:block th:insert="~{fragments/footer}"></th:block>
-
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 <script>
-    const myFunction = () => {
-        const columns = [
-            {name: 'Auto', index: 2, isFilter: true},
-            {name: 'Person', index: 1, isFilter: true}
-        ]
-        const filterColumns = columns.filter(c => c.isFilter).map(c => c.index)
-        const trs = document.querySelectorAll('#table tbody tr')
-        const filter = document.querySelector('#filterInput').value
-        const regex = new RegExp(escape(filter), 'i')
-        const isFoundInTds = td => regex.test(td.innerHTML)
+    const inputName = document.getElementById('filterName');
+    const inputCity = document.getElementById('filterCar');
+    const clearBtn = document.getElementById('clearBtn');
+    const tbody = document.querySelector('#table tbody');
+    const tfooter = document.querySelector('#table tfoot');
 
-        const isFound = childrenArr => childrenArr.some(isFoundInTds)
-        const setTrStyleDisplay = ({style, children}) => {
-            style.display = isFound([
-                ...filterColumns.map(c => children[c]) // <-- filter Columns
-            ]) ? '' : 'none'
+    const norm = s => String(s || '').toLowerCase();
+
+    const debouncedFilter = debounce(filtering, 300);
+
+    inputName.addEventListener('input', debouncedFilter);
+    inputCity.addEventListener('input', debouncedFilter);
+
+    clearBtn.addEventListener('click', () => {
+        inputName.value = '';
+        inputCity.value = '';
+        filtering();
+        inputName.focus();
+    });
+
+
+    function filtering() {
+        const nameTerm = norm(inputName.value).trim();
+        const cityTerm = norm(inputCity.value).trim();
+
+        for (const row of tbody.rows) {
+            const matchesName = nameTerm === '' || norm(row.cells[1].textContent).includes(nameTerm);
+            const matchesCity = cityTerm === '' || norm(row.cells[2].textContent).includes(cityTerm);
+
+            if (matchesName && matchesCity) {
+                row.classList.remove('hidden');
+            } else {
+                row.classList.add('hidden');
+            }
         }
+        recalculateTotal()
+    }
 
-        trs.forEach(setTrStyleDisplay)
-        recalculateTotal();
+    function debounce(fn, delay = 300) {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn.apply(this, args), delay);
+        };
     }
 
     const recalculateTotal = () => {
-
-        const table = document.getElementById("table");
         let totalLiters = 0;
         let totalKm = 0;
 
         // Skip header row (start at 1)
-        for (let i = 1; i < table.rows.length - 2; i++) {
-            if (table.rows[i].style.display != 'none') {
-                totalKm += parseFloat(table.rows[i].cells[3].innerText.trim()) || 0;
-                totalLiters += parseFloat(table.rows[i].cells[5].innerText.trim()) || 0;
+        for (const row of tbody.rows) {
+            if (!row.classList.contains('hidden')) {
+                totalKm += parseFloat(row.cells[3].innerText.trim()) || 0;
+                totalLiters += parseFloat(row.cells[5].innerText.trim()) || 0;
             }
         }
-        table.rows[table.rows.length - 1].cells[3].textContent = totalKm;
-        table.rows[table.rows.length - 1].cells[5].textContent = totalLiters;
+        tfooter.rows[0].cells[3].innerHTML = totalKm;
+        tfooter.rows[0].cells[5].innerHTML = totalLiters;
     }
 </script>

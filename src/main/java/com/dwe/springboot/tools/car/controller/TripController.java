@@ -24,18 +24,6 @@ import java.util.NoSuchElementException;
 @Controller
 class TripController {
 
-    String startTable = """
-            <table id="table">
-            <thead>
-            <tr><td>Daniel</td><td>Suzanne</td><td>Maria</td><td>Km</td><td>Liters</td><td>Amount</td></tr>
-            </thead>
-            """;
-    String startRow = """
-            <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>
-            """;
-    String endTable = """
-            <tfoot></tfoot></table>
-            """;
 
     private final String[] gifies = {
             "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjZzNnl4Z2t6NGxuZnRkandheDB0NjhtbWVvazR3OWd2MWZhbTZwNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XreQmk7ETCak0/giphy.gif",
@@ -68,137 +56,8 @@ class TripController {
         return "trip.html";
     }
 
-    record KmLiter(int km, int liter) {
-    }
 
-    @GetMapping("/trip/alluser/tank")
-    public String getCarListTank(Model model, Authentication authentication) {
-        DecimalFormat df = new DecimalFormat("##.##");
-
-        List<TripEntity> list = driveService.getAllAsList();
-        StringBuffer sb = new StringBuffer();
-        sb.append(startTable);
-        int totalToyota = 0, totalVW = 0, totalT_Daniel = 0, totalT_Maria = 0, totalT_Suzanne = 0, totalVW_Daniel = 0, totalVW_Maria = 0, totalVW_Suzanne = 0;
-        int startToyota = 0, startVW = 0;
-
-        for (TripEntity tripEntity : list) {
-            if (tripEntity.getCarType().equalsIgnoreCase("Toyota")) {
-                if (totalToyota == 0) startToyota = tripEntity.getKmTotal();
-                totalToyota = tripEntity.getKmTotal();
-                if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
-                    totalT_Daniel += tripEntity.getKm();
-                }
-                if (tripEntity.getPerson().equalsIgnoreCase("maria")) {
-                    totalT_Maria += tripEntity.getKm();
-                }
-                if (tripEntity.getPerson().equalsIgnoreCase("suzanne")) {
-                    totalT_Suzanne += tripEntity.getKm();
-                }
-            }
-
-            if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
-                if (totalVW == 0) startVW = tripEntity.getKmTotal();
-                totalVW = tripEntity.getKmTotal();
-                if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
-                    totalVW_Daniel += tripEntity.getKm();
-                }
-                if (tripEntity.getPerson().equalsIgnoreCase("maria")) {
-                    totalVW_Maria += tripEntity.getKm();
-                }
-                if (tripEntity.getPerson().equalsIgnoreCase("Suzanne")) {
-                    totalVW_Suzanne += tripEntity.getKm();
-                }
-            }
-
-            if (tripEntity.getLiters() != 0) {
-                sb.append("<tbody>");
-                if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
-                    int totalKms = totalVW - startVW;
-                    float totalAmount = ((float)tripEntity.getAmount()) / 100;
-
-                    sb.append(startRow.formatted(totalVW_Daniel, totalVW_Suzanne, totalVW_Maria, totalKms, tripEntity.getLiters(),
-                            df.format(totalAmount) + " (VW)"));
-
-                    sb.append(startRow.formatted(
-                            (totalVW_Daniel == 0) ? "0%" : df.format(totalVW_Daniel * 1.0 / totalKms * 100) + "%",
-                            (totalVW_Suzanne == 0) ? "0%" : df.format(totalVW_Suzanne * 1.0 / totalKms * 100) + "%",
-                            (totalVW_Maria == 0) ? "0%" : df.format(totalVW_Maria * 1.0 / totalKms * 100) + "%", "", "VW", "percentage"));
-                    sb.append(startRow.formatted(
-                            (totalVW_Daniel == 0) ? " 0" : df.format(totalVW_Daniel * 1.0 / totalKms * totalAmount),
-                            (totalVW_Suzanne == 0) ? "0" : df.format(totalVW_Suzanne * 1.0 / totalKms * totalAmount),
-                            (totalVW_Maria == 0) ? "0" : df.format(totalVW_Maria * 1.0 / totalKms * totalAmount), "", "VW", "price")
-                    );
-
-                    totalVW = totalVW_Daniel = totalVW_Maria = totalVW_Suzanne = 0;
-                }
-                if (tripEntity.getCarType().equalsIgnoreCase("Toyota")) {
-                    int totalKms = totalToyota - startToyota;
-                    float totalAmount = tripEntity.getAmount() / 100;
-                    sb.append(startRow.formatted(totalT_Daniel, totalT_Suzanne, totalT_Maria, totalKms, tripEntity.getLiters(),
-                            totalAmount + " (Toyota)"));
-
-                    sb.append(startRow.formatted(
-                            (totalT_Daniel == 0) ? "0%" : df.format(totalT_Daniel * 1.0 / totalKms * 100) + "%",
-                            (totalT_Suzanne == 0) ? "0%" : df.format(totalT_Suzanne * 1.0 / totalKms * 100) + "%",
-                            (totalT_Maria == 0) ? "0%" : df.format(totalT_Maria * 1.0 / totalKms * 100) + "%", "", "Toyota", "parts")
-                    );
-                    sb.append(startRow.formatted(
-                            (totalT_Daniel == 0) ? "0%" : df.format(totalT_Daniel * 1.0 / totalKms * 100 * totalAmount),
-                            (totalT_Suzanne == 0) ? "0%" : df.format(totalT_Suzanne * 1.0 / totalKms * 100 * totalAmount),
-                            (totalT_Maria == 0) ? "0%" : df.format(totalT_Maria * 1.0 / totalKms * 100 * totalAmount), "", "Toyota", "parts")
-                    );
-
-                    totalAmount = totalT_Daniel = totalT_Suzanne = totalT_Maria = 0;
-                    sb.append(startRow.formatted("", "", "", "", "", ""));
-                }
-                sb.append("</tbody>");
-            }
-        }
-        sb.append("<tbody>");
-        sb.append(startRow.formatted("left over:", "", "", "", "", ""));
-        sb.append(startRow.formatted(totalVW_Daniel, totalVW_Suzanne, totalVW_Maria, "VW", "", ""));
-        sb.append(startRow.formatted(totalT_Daniel, totalT_Suzanne, totalT_Maria, "Toyota", "", ""));
-        sb.append("</tbody>");
-
-        model.addAttribute("fueloverview", sb.append(endTable));
-        return "overview.html";
-    }
-
-    @GetMapping("/trip/alluser")
-    public String getCarList(Model model, Authentication authentication) {
-        List<TripEntity> list;
-        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            list = driveService.getAllAsList();
-        } else {
-            list = driveService.getAllAsList(authentication.getName());
-        }
-        model.addAttribute("trips", list);
-        model.addAttribute("kmTotal",
-                list.stream()
-                        .map(TripEntity::getKm).map(Long::valueOf)
-                        .reduce(0L, Long::sum)
-        );
-        model.addAttribute("litersTotal",
-                list.stream()
-                        .map(TripEntity::getLiters).map(Long::valueOf)
-                        .reduce(0L, Long::sum)
-        );
-        return "listtrips.html";
-    }
-
-    @GetMapping("/trip/all")
-    public ResponseEntity<String> getCarRecordList() {
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add("Content-Type", "text/csv");
-        responseHeaders.add("Content-Disposition", "attachment; filename=trips.csv");
-        return new ResponseEntity<>(
-                driveService.getAllAsCsv().stream().reduce((a, b) -> a + "\r\n" + b).get(),
-                responseHeaders,
-                HttpStatus.OK);
-    }
-
-
-    // ***************
+// ***************
 // plumbing
 // ***************
     final DriveService driveService;
@@ -230,5 +89,4 @@ class TripController {
         model.addAttribute("imagesrc", gifies[counter++ % 5]);
         return "success.html";
     }
-
 }
