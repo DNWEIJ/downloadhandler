@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -150,12 +149,8 @@ class OverviewController {
 
     @GetMapping("/trip/alluser")
     public String getCarList(Model model, Authentication authentication) {
-        List<TripEntity> list;
-        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            list = driveService.getAllAsList();
-        } else {
-            list = driveService.getAllAsList(authentication.getName());
-        }
+        List<TripEntity> list = driveService.getAllAsList();
+
         model.addAttribute("trips", list);
         model.addAttribute("kmTotal",
                 list.stream()
