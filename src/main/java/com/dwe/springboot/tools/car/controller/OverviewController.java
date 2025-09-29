@@ -22,7 +22,7 @@ class OverviewController {
     String startTable = """
             <table class="table-tight" id="table">
             <thead>
-            <tr><td>Daniel</td><td>Suzanne</td><td>Maria</td><td>Km</td><td>Liters</td><td>Amount</td></tr>
+            <tr><td>Daniel</td><td>Suzanne</td><td>Maria&nbsp;&nbsp;</td><td>Km</td><td>Liters</td><td>Amount</td></tr>
             </thead>
             """;
     String startRow = """
@@ -49,26 +49,26 @@ class OverviewController {
         for (TripEntity tripEntity : list) {
             if (tripEntity.getCarType().equalsIgnoreCase("Toyota")) {
                 if (startToyota == 0) startToyota = tripEntity.getKmTotal();
-                if (tripEntity.getPerson().equalsIgnoreCase("Daniel")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
                     totalT_Daniel += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("Maria&nbsp;")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("maria")) {
                     totalT_Maria += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("Suzanne")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("suzanne")) {
                     totalT_Suzanne += tripEntity.getKm();
                 }
             }
 
             if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
                 if (startVW == 0) startVW = tripEntity.getKmTotal();
-                if (tripEntity.getPerson().equalsIgnoreCase("Daniel")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
                     totalVW_Daniel += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("Maria&nbsp;")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("maria")) {
                     totalVW_Maria += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("Suzanne")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("suzanne")) {
                     totalVW_Suzanne += tripEntity.getKm();
                 }
             }
