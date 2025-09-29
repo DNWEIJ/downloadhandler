@@ -4,17 +4,17 @@
     <input
             type="search"
             id="filterName"
-            placeholder="Filter on name">
+            placeholder="Naam">
     <input
             type="search"
             id="filterCar"
-            placeholder="Filter on car">
+            placeholder=" Auto">
 
     <button id="clearBtn">Clear</button>
 </fieldset>
 
 <fieldset>
-    <table id="table">
+    <table class="table-tight" id="table">
         <thead>
         <tr>
             <th scope="col">Datum</th>
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr th:each="trip: ${trips}">
-            <td scope="col" th:text="${trip.driveDate}"/>
+            <td scope="col" th:text="${#temporals.format(trip.driveDateLocalDate, 'dd-MMM')}"/>
             <td scope="col" th:text="${trip.person}"/>
             <td scope="col" th:text="${trip.carType}"/>
             <td scope="col" th:text="${trip.km}"/>
@@ -54,6 +54,39 @@
 <style>
     .hidden {
         display: none;
+    }
+
+    .table-tight {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .table-tight td,
+    .table-tight th {
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid lightgrey;
+        line-height: 1.2;
+    }
+
+    .table-tight td {
+        margin: 0;
+        padding-right: 2px;
+        padding-bottom: 2px;
+    }
+
+    .table-tight tr {
+        margin: 0;
+        padding: 0;
+    }
+
+    .table-tight .right {
+        text-align: right;
+    }
+
+    .table-tight .left {
+        text-align: left;
     }
 </style>
 <script>

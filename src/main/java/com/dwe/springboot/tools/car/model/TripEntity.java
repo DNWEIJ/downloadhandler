@@ -3,12 +3,18 @@ package com.dwe.springboot.tools.car.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity(name = "car_entity")
 public class TripEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
+    @Transient
+    LocalDateTime driveDateLocalDate;
     String driveDate;
     String carType;
     String person;
@@ -37,6 +43,10 @@ public class TripEntity {
 
     }
 
+    public LocalDate getDriveDateLocalDate() {
+        DateTimeFormatter daterFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(driveDate, daterFormatter);
+    }
 
     @Override
     public String toString() {

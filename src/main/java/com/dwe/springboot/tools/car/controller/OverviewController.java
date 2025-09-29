@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 class OverviewController {
 
     String startTable = """
-            <table id="table">
+            <table class="table-tight" id="table">
             <thead>
             <tr><td>Daniel</td><td>Suzanne</td><td>Maria</td><td>Km</td><td>Liters</td><td>Amount</td></tr>
             </thead>
@@ -49,23 +49,23 @@ class OverviewController {
         for (TripEntity tripEntity : list) {
             if (tripEntity.getCarType().equalsIgnoreCase("Toyota")) {
                 if (startToyota == 0) startToyota = tripEntity.getKmTotal();
-                if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("Daniel")) {
                     totalT_Daniel += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("maria")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("Maria&nbsp;")) {
                     totalT_Maria += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("suzanne")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("Suzanne")) {
                     totalT_Suzanne += tripEntity.getKm();
                 }
             }
 
             if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
                 if (startVW == 0) startVW = tripEntity.getKmTotal();
-                if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("Daniel")) {
                     totalVW_Daniel += tripEntity.getKm();
                 }
-                if (tripEntity.getPerson().equalsIgnoreCase("maria")) {
+                if (tripEntity.getPerson().equalsIgnoreCase("Maria&nbsp;")) {
                     totalVW_Maria += tripEntity.getKm();
                 }
                 if (tripEntity.getPerson().equalsIgnoreCase("Suzanne")) {
@@ -90,16 +90,16 @@ class OverviewController {
                     sb.append(startRow.formatted(
                             (totalVW_Daniel == 0) ? "0 %" : df.format(percDaniel) + " %",
                             (totalVW_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + " %",
-                            (totalVW_Maria == 0) ? "0 %" : df.format(percMaria) + " %", "", "VW", "percentage"));
+                            (totalVW_Maria == 0) ? "0 %" : df.format(percMaria) + " %", "", "VW", " %"));
                     sb.append(startRow.formatted(
                             (totalVW_Daniel == 0) ? "€ 0" : df.format(totalAmount * percDaniel),
                             (totalVW_Suzanne == 0) ? "€ 0" : df.format(totalAmount * percSuzanne),
-                            (totalVW_Maria == 0) ? "€ 0" : df.format(totalAmount * percMaria), "", "VW", "fuel price")
+                            (totalVW_Maria == 0) ? "€ 0" : df.format(totalAmount * percMaria), "", "VW", "fuel")
                     );
                     sb.append(startRow.formatted(
                             (totalVW_Daniel == 0) ? "€ 0" : "€ " + df.format(totalVW_Daniel * 0.1),
                             (totalVW_Suzanne == 0) ? "€ 0" : "€ " + df.format(totalVW_Suzanne * 0.1),
-                            (totalVW_Maria == 0) ? "€ 0" : "€ " + df.format(totalVW_Maria * 0.1), "", "VW", "cost price")
+                            (totalVW_Maria == 0) ? "€ 0" : "€ " + df.format(totalVW_Maria * 0.1), "", "VW", "cost")
                     );
 
                     startVW = totalVW_Daniel = totalVW_Maria = totalVW_Suzanne = 0;
@@ -117,17 +117,17 @@ class OverviewController {
                     sb.append(startRow.formatted(
                             (totalT_Daniel == 0) ? "0 %" : df.format(percDaniel) + " %",
                             (totalT_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + " %",
-                            (totalT_Maria == 0) ? "0 %" : df.format(percMaria) + " %", "", "Toyota", "percentage")
+                            (totalT_Maria == 0) ? "0 %" : df.format(percMaria) + " %", "", "Toyota", " %")
                     );
                     sb.append(startRow.formatted(
                             (totalT_Daniel == 0) ? "€ 0" : "€ " + df.format(totalAmount * percDaniel / 100),
                             (totalT_Suzanne == 0) ? "€ 0" : "€ " + df.format(totalAmount * percSuzanne / 100),
-                            (totalT_Maria == 0) ? "€ 0" : "€ " + df.format(totalAmount * percMaria / 100), "", "Toyota", "fuel price")
+                            (totalT_Maria == 0) ? "€ 0" : "€ " + df.format(totalAmount * percMaria / 100), "", "Toyota", "fuel")
                     );
                     sb.append(startRow.formatted(
                             (totalT_Daniel == 0) ? "€ 0" : "€ " + df.format(totalT_Daniel * 0.1),
                             (totalT_Suzanne == 0) ? "€ 0" : "€ " + df.format(totalT_Suzanne * 0.1),
-                            (totalT_Maria == 0) ? "€ 0" : "€ " + df.format(totalT_Maria * 0.1), "", "Toyota", "cost price")
+                            (totalT_Maria == 0) ? "€ 0" : "€ " + df.format(totalT_Maria * 0.1), "", "Toyota", "cost")
                     );
 
 
