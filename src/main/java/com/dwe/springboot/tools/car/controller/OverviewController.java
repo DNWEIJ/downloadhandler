@@ -22,7 +22,7 @@ class OverviewController {
     String startTable = """
             <table class="table-tight" id="table">
             <thead>
-            <tr><td>Daniel</td><td>Suzanne</td><td>Maria&nbsp;&nbsp;</td><td>Km</td><td>Liters</td><td>Amount</td></tr>
+            <tr><td>Daniel</td><td>Suzanne</td><td>Maria&nbsp;&nbsp;&nbsp;</td><td>Km</td><td>Ltrs</td><td>Amount</td></tr>
             </thead>
             """;
     String startRow = """
