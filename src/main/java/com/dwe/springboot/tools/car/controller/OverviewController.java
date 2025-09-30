@@ -22,7 +22,7 @@ class OverviewController {
     String startTable = """
             <table class="table-tight" id="table">
             <thead>
-            <tr><td>Daniel</td><td>Suzanne</td><td>Maria&nbsp;&nbsp;&nbsp;</td><td>Km</td><td>Ltrs</td><td>Amount</td></tr>
+            <tr><td>Daniel</td><td>Suzanne</td><td>Maria&nbsp;&nbsp;&nbsp;</td><td>Tot Km</td><td>Ltrs</td><td>Amount</td></tr>
             </thead>
             """;
     String startRow = """
@@ -32,11 +32,8 @@ class OverviewController {
             <tfoot></tfoot></table>
             """;
 
-    record KmLiter(int km, int liter) {
-    }
-
     @GetMapping("/trip/alluser/tank")
-    public String getCarListTank(Model model, Authentication authentication) {
+    public String getCarListTank(Model model) {
         DecimalFormat df = new DecimalFormat("##.##");
 
         List<TripEntity> list = driveService.getAllAsList();
@@ -81,25 +78,25 @@ class OverviewController {
                     int totalKms = tripEntity.getKmTotal() - startVW;
 
                     sb.append(startRow.formatted(totalVW_Daniel, totalVW_Suzanne, totalVW_Maria, totalKms,
-                            tripEntity.getLiters(), df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
+                            tripEntity.getLiters(), "€"  + df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
 
                     double percDaniel = (totalVW_Daniel * 1.0 / totalKms * 100);
                     double percSuzanne = (totalVW_Suzanne * 1.0 / totalKms * 100);
                     double percMaria = (totalVW_Maria * 1.0 / totalKms * 100);
 
                     sb.append(startRow.formatted(
-                            (totalVW_Daniel == 0) ? "0 %" : df.format(percDaniel) + " %",
-                            (totalVW_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + " %",
-                            (totalVW_Maria == 0) ? "0 %" : df.format(percMaria) + " %", "", "VW", " %"));
+                            (totalVW_Daniel == 0) ? "0 %" : df.format(percDaniel) + "%",
+                            (totalVW_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + "%",
+                            (totalVW_Maria == 0) ? "0 %" : df.format(percMaria) + "%", "", "VW", "%"));
                     sb.append(startRow.formatted(
-                            (totalVW_Daniel == 0) ? "€ 0" : df.format(totalAmount * percDaniel),
-                            (totalVW_Suzanne == 0) ? "€ 0" : df.format(totalAmount * percSuzanne),
-                            (totalVW_Maria == 0) ? "€ 0" : df.format(totalAmount * percMaria), "", "VW", "fuel")
+                            (totalVW_Daniel == 0) ? "€0" : df.format(totalAmount * percDaniel / 100),
+                            (totalVW_Suzanne == 0) ? "€0" : df.format(totalAmount * percSuzanne / 100),
+                            (totalVW_Maria == 0) ? "€0" : df.format(totalAmount * percMaria / 100), "", "VW", "fuel")
                     );
                     sb.append(startRow.formatted(
-                            (totalVW_Daniel == 0) ? "€ 0" : "€ " + df.format(totalVW_Daniel * 0.1),
-                            (totalVW_Suzanne == 0) ? "€ 0" : "€ " + df.format(totalVW_Suzanne * 0.1),
-                            (totalVW_Maria == 0) ? "€ 0" : "€ " + df.format(totalVW_Maria * 0.1), "", "VW", "cost")
+                            (totalVW_Daniel == 0) ? "€0" : "€" + df.format(totalVW_Daniel * 0.1),
+                            (totalVW_Suzanne == 0) ? "€0" : "€" + df.format(totalVW_Suzanne * 0.1),
+                            (totalVW_Maria == 0) ? "€0" : "€" + df.format(totalVW_Maria * 0.1), "", "VW", "cost")
                     );
 
                     startVW = totalVW_Daniel = totalVW_Maria = totalVW_Suzanne = 0;
@@ -108,26 +105,26 @@ class OverviewController {
                     int totalKms = tripEntity.getKmTotal() - startToyota;
 
                     sb.append(startRow.formatted(totalT_Daniel, totalT_Suzanne, totalT_Maria, totalKms,
-                            tripEntity.getLiters(), totalAmount + " <b>(" + tripEntity.getPerson() + ")</b>"));
+                            tripEntity.getLiters(), "€" + df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
 
                     double percDaniel = (totalT_Daniel * 1.0 / totalKms * 100);
                     double percSuzanne = (totalT_Suzanne * 1.0 / totalKms * 100);
                     double percMaria = (totalT_Maria * 1.0 / totalKms * 100);
 
                     sb.append(startRow.formatted(
-                            (totalT_Daniel == 0) ? "0 %" : df.format(percDaniel) + " %",
-                            (totalT_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + " %",
-                            (totalT_Maria == 0) ? "0 %" : df.format(percMaria) + " %", "", "Toyota", " %")
+                            (totalT_Daniel == 0) ? "0 %" : df.format(percDaniel) + "%",
+                            (totalT_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + "%",
+                            (totalT_Maria == 0) ? "0 %" : df.format(percMaria) + "%", "", "Toyota", "%")
                     );
                     sb.append(startRow.formatted(
-                            (totalT_Daniel == 0) ? "€ 0" : "€ " + df.format(totalAmount * percDaniel / 100),
-                            (totalT_Suzanne == 0) ? "€ 0" : "€ " + df.format(totalAmount * percSuzanne / 100),
-                            (totalT_Maria == 0) ? "€ 0" : "€ " + df.format(totalAmount * percMaria / 100), "", "Toyota", "fuel")
+                            (totalT_Daniel == 0) ? "€0" : "€" + df.format(totalAmount * percDaniel / 100),
+                            (totalT_Suzanne == 0) ? "€0" : "€" + df.format(totalAmount * percSuzanne / 100),
+                            (totalT_Maria == 0) ? "€0" : "€" + df.format(totalAmount * percMaria / 100), "", "Toyota", "fuel")
                     );
                     sb.append(startRow.formatted(
-                            (totalT_Daniel == 0) ? "€ 0" : "€ " + df.format(totalT_Daniel * 0.1),
-                            (totalT_Suzanne == 0) ? "€ 0" : "€ " + df.format(totalT_Suzanne * 0.1),
-                            (totalT_Maria == 0) ? "€ 0" : "€ " + df.format(totalT_Maria * 0.1), "", "Toyota", "cost")
+                            (totalT_Daniel == 0) ? "€0" : "€" + df.format(totalT_Daniel * 0.1),
+                            (totalT_Suzanne == 0) ? "€0" : "€" + df.format(totalT_Suzanne * 0.1),
+                            (totalT_Maria == 0) ? "€0" : "€" + df.format(totalT_Maria * 0.1), "", "Toyota", "cost")
                     );
 
 
@@ -148,7 +145,7 @@ class OverviewController {
     }
 
     @GetMapping("/trip/alluser")
-    public String getCarList(Model model, Authentication authentication) {
+    public String getCarList(Model model) {
         List<TripEntity> list = driveService.getAllAsList();
 
         model.addAttribute("trips", list);
