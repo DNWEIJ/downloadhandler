@@ -6,7 +6,6 @@ import com.dwe.springboot.tools.car.service.DriveService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -78,7 +77,7 @@ class OverviewController {
                     int totalKms = tripEntity.getKmTotal() - startVW;
 
                     sb.append(startRow.formatted(totalVW_Daniel, totalVW_Suzanne, totalVW_Maria, totalKms,
-                            tripEntity.getLiters(), "€"  + df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
+                            tripEntity.getLiters(), "€" + df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
 
                     double percDaniel = (totalVW_Daniel * 1.0 / totalKms * 100);
                     double percSuzanne = (totalVW_Suzanne * 1.0 / totalKms * 100);
@@ -87,16 +86,16 @@ class OverviewController {
                     sb.append(startRow.formatted(
                             (totalVW_Daniel == 0) ? "0 %" : df.format(percDaniel) + "%",
                             (totalVW_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + "%",
-                            (totalVW_Maria == 0) ? "0 %" : df.format(percMaria) + "%", "", "VW", "%"));
+                            (totalVW_Maria == 0) ? "0 %" : df.format(percMaria) + "%", "", "%", "VW"));
                     sb.append(startRow.formatted(
-                            (totalVW_Daniel == 0) ? "€0" : df.format(totalAmount * percDaniel / 100),
-                            (totalVW_Suzanne == 0) ? "€0" : df.format(totalAmount * percSuzanne / 100),
-                            (totalVW_Maria == 0) ? "€0" : df.format(totalAmount * percMaria / 100), "", "VW", "fuel")
+                            (totalVW_Daniel == 0) ? "€0" : "€" + df.format(totalAmount * percDaniel / 100),
+                            (totalVW_Suzanne == 0) ? "€0" : "€" + df.format(totalAmount * percSuzanne / 100),
+                            (totalVW_Maria == 0) ? "€0" : "€" + df.format(totalAmount * percMaria / 100), "", "fuel", "VW")
                     );
                     sb.append(startRow.formatted(
                             (totalVW_Daniel == 0) ? "€0" : "€" + df.format(totalVW_Daniel * 0.1),
                             (totalVW_Suzanne == 0) ? "€0" : "€" + df.format(totalVW_Suzanne * 0.1),
-                            (totalVW_Maria == 0) ? "€0" : "€" + df.format(totalVW_Maria * 0.1), "", "VW", "cost")
+                            (totalVW_Maria == 0) ? "€0" : "€" + df.format(totalVW_Maria * 0.1), "", "cost", "VW")
                     );
 
                     startVW = totalVW_Daniel = totalVW_Maria = totalVW_Suzanne = 0;
@@ -114,17 +113,17 @@ class OverviewController {
                     sb.append(startRow.formatted(
                             (totalT_Daniel == 0) ? "0 %" : df.format(percDaniel) + "%",
                             (totalT_Suzanne == 0) ? "0 %" : df.format(percSuzanne) + "%",
-                            (totalT_Maria == 0) ? "0 %" : df.format(percMaria) + "%", "", "Toyota", "%")
+                            (totalT_Maria == 0) ? "0 %" : df.format(percMaria) + "%", "", "%", "Toyota")
                     );
                     sb.append(startRow.formatted(
                             (totalT_Daniel == 0) ? "€0" : "€" + df.format(totalAmount * percDaniel / 100),
                             (totalT_Suzanne == 0) ? "€0" : "€" + df.format(totalAmount * percSuzanne / 100),
-                            (totalT_Maria == 0) ? "€0" : "€" + df.format(totalAmount * percMaria / 100), "", "Toyota", "fuel")
+                            (totalT_Maria == 0) ? "€0" : "€" + df.format(totalAmount * percMaria / 100), "", "fuel", "Toyota")
                     );
                     sb.append(startRow.formatted(
                             (totalT_Daniel == 0) ? "€0" : "€" + df.format(totalT_Daniel * 0.1),
                             (totalT_Suzanne == 0) ? "€0" : "€" + df.format(totalT_Suzanne * 0.1),
-                            (totalT_Maria == 0) ? "€0" : "€" + df.format(totalT_Maria * 0.1), "", "Toyota", "cost")
+                            (totalT_Maria == 0) ? "€0" : "€" + df.format(totalT_Maria * 0.1), "", "cost", "Toyota")
                     );
 
 
