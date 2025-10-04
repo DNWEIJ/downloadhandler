@@ -27,7 +27,7 @@ class DownloadHandlerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         migrationService.init();
-        storageService.init();
+        // storageService.init();
 
     }
 }

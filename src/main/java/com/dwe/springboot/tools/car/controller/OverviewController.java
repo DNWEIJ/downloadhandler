@@ -40,11 +40,10 @@ class OverviewController {
         sb.append(startTable);
         int totalT_Daniel = 0, totalT_Maria = 0, totalT_Suzanne = 0;
         int totalVW_Daniel = 0, totalVW_Maria = 0, totalVW_Suzanne = 0;
-        int startToyota = 0, startVW = 0;
 
         for (TripEntity tripEntity : list) {
             if (tripEntity.getCarType().equalsIgnoreCase("Toyota")) {
-                if (startToyota == 0) startToyota = tripEntity.getKmTotal();
+
                 if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
                     totalT_Daniel += tripEntity.getKm();
                 }
@@ -57,7 +56,6 @@ class OverviewController {
             }
 
             if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
-                if (startVW == 0) startVW = tripEntity.getKmTotal();
                 if (tripEntity.getPerson().equalsIgnoreCase("daniel")) {
                     totalVW_Daniel += tripEntity.getKm();
                 }
@@ -74,7 +72,7 @@ class OverviewController {
                 double totalAmount = tripEntity.getAmount() * 1.0 / 100;
 
                 if (tripEntity.getCarType().equalsIgnoreCase("VW")) {
-                    int totalKms = tripEntity.getKmTotal() - startVW;
+                    int totalKms = totalVW_Daniel + totalVW_Suzanne + totalVW_Maria;
 
                     sb.append(startRow.formatted(totalVW_Daniel, totalVW_Suzanne, totalVW_Maria, totalKms,
                             tripEntity.getLiters(), "€" + df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
@@ -98,10 +96,10 @@ class OverviewController {
                             (totalVW_Maria == 0) ? "€0" : "€" + df.format(totalVW_Maria * 0.1), "", "cost", "VW")
                     );
 
-                    startVW = totalVW_Daniel = totalVW_Maria = totalVW_Suzanne = 0;
+                    totalVW_Daniel = totalVW_Maria = totalVW_Suzanne = 0;
                 }
                 if (tripEntity.getCarType().equalsIgnoreCase("Toyota")) {
-                    int totalKms = tripEntity.getKmTotal() - startToyota;
+                    int totalKms = totalT_Daniel + totalT_Suzanne + totalT_Maria;
 
                     sb.append(startRow.formatted(totalT_Daniel, totalT_Suzanne, totalT_Maria, totalKms,
                             tripEntity.getLiters(), "€" + df.format(totalAmount) + " <b>(" + tripEntity.getPerson() + ")</b>"));
@@ -126,8 +124,7 @@ class OverviewController {
                             (totalT_Maria == 0) ? "€0" : "€" + df.format(totalT_Maria * 0.1), "", "cost", "Toyota")
                     );
 
-
-                    startToyota = totalT_Daniel = totalT_Suzanne = totalT_Maria = 0;
+                    totalT_Daniel = totalT_Suzanne = totalT_Maria = 0;
                     sb.append(startRow.formatted("", "", "", "", "", ""));
                 }
                 sb.append("</tbody>");
