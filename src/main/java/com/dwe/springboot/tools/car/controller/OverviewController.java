@@ -24,6 +24,8 @@ class OverviewController {
     final DriveService driveService;
     final CarService carService;
     String startTable = """
+            <details class="collapsable-table">
+            <summary>Click to toggle</summary>
             <table class="table-tight %s" id="table">
             """;
     String headerTable = """
@@ -35,7 +37,7 @@ class OverviewController {
             <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>
             """;
     String footerTable = """
-            <tfoot></tfoot></table>
+            <tfoot></tfoot></table></details>
             """;
     DecimalFormat df = new DecimalFormat("##.##");
 

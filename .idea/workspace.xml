@@ -247,7 +247,7 @@
       <workItem from="1758704110966" duration="2501000" />
       <workItem from="1758707920592" duration="2063000" />
       <workItem from="1759141392851" duration="12471000" />
-      <workItem from="1759611217716" duration="7425000" />
+      <workItem from="1759611217716" duration="9739000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -625,7 +625,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759613973062</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="fix car save and change list page">
+      <option name="closed" value="true" />
+      <created>1759659288582</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1759659288582</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

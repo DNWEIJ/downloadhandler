@@ -35,6 +35,7 @@
         text-align: left;
     }
 
+    /* zebra striping */
     .odd tbody td,
     .odd tbody tr,
     .odd thead td,
@@ -48,9 +49,26 @@
     .even thead tr {
         background-color: lightyellow;
     }
+
+    .collapsable-table summary {
+        cursor: pointer;
+        font-weight: bold;
+        background: #eee;
+        padding: .5rem;
+    }
+
 </style>
 <fieldset>
     [(${fueloverview})]
 </fieldset>
+<script>
+    const details = document.querySelectorAll('details');
+    if (details.length >= 2) {
+        details[details.length - 1].setAttribute('open', '');
+        details[details.length - 2].setAttribute('open', '');
+    } else if (details.length === 1) {
+        details[0].setAttribute('open', '');
+    }
+</script>
 
 <th:block th:insert="~{fragments/footer}"></th:block>
