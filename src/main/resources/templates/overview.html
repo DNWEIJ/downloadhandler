@@ -1,20 +1,11 @@
 <th:block th:insert="~{fragments/header}"></th:block>
 <style>
-    #table tbody:nth-child(even) tr td
-    {
-        background-color: lightsalmon;
-    }
-
-    #table tbody:nth-child(odd) tr td
-    {
-        background-color: lightyellow;
-    }
-
     .table-tight {
         width: 100%;
         margin: 0;
         padding: 0;
         white-space: nowrap;
+        margin-bottom: 1em;
     }
 
     .table-tight td,
@@ -42,6 +33,20 @@
 
     .table-tight .left {
         text-align: left;
+    }
+
+    .odd tbody td,
+    .odd tbody tr,
+    .odd thead td,
+    .odd thead tr {
+        background-color: lightcyan;
+    }
+
+    .even tbody td,
+    .even tbody tr,
+    .even thead td,
+    .even thead tr {
+        background-color: lightyellow;
     }
 </style>
 <fieldset>
