@@ -3,11 +3,9 @@ package com.dwe.springboot.tools.car.controller;
 import com.dwe.springboot.tools.car.model.TripEntity;
 import com.dwe.springboot.tools.car.service.CarService;
 import com.dwe.springboot.tools.car.service.DriveService;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.text.DecimalFormat;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -53,11 +49,11 @@ class TripController {
     String getCarRecord(Model model) {
         model.addAttribute("carTypes", carService.getAllNames());
         model.addAttribute("carsPreviousTotal", carService.getAllNameAndTotalKm());
-        return "trip.html";
+        return "/car/trip.html";
     }
 
 
-// ***************
+    // ***************
 // plumbing
 // ***************
     final DriveService driveService;

@@ -18,14 +18,11 @@ import java.util.NoSuchElementException;
 @Controller
 class OverviewController {
 
-    // ***************
-// plumbing
-// ***************
     final DriveService driveService;
     final CarService carService;
     String startTable = """
             <details class="collapsable-table">
-            <summary>Click to toggle</summary>
+            <summary>Click to open/close</summary>
             <table class="table-tight %s" id="table">
             """;
     String headerTable = """
@@ -137,7 +134,7 @@ class OverviewController {
         sb.append(footerTable);
 
         model.addAttribute("fueloverview", sb.append(footerTable));
-        return "overview.html";
+        return "/car/overview.html";
     }
 
     private void extracted(StringBuffer sb, int total_Daniel, double percDaniel, int total_Suzanne, double percSuzanne, int totalT_Maria, double percMaria, double totalAmount) {
@@ -179,7 +176,7 @@ class OverviewController {
                         .map(TripEntity::getLiters).map(Long::valueOf)
                         .reduce(0L, Long::sum)
         );
-        return "listtrips.html";
+        return "/car/listtrips.html";
     }
 
     @GetMapping("/trip/all")
